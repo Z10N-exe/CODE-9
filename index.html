@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code 9 | Software Development & Digital Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #6e8efb 0%, #a777e3 100%);
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="text-indigo-600 font-bold text-2xl">CODE 9</span>
+                    </div>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+                    <a href="#services" class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium">Services</a>
+                    <a href="#approach" class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium">Approach</a>
+                    <a href="#projects" class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium">Projects</a>
+                    <a href="#contact" class="text-gray-700 hover:text-indigo-600 px-3 py-2 text-sm font-medium">Contact</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menu-toggle" class="text-gray-700 hover:text-indigo-600">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#services" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-indigo-600">Services</a>
+                <a href="#approach" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-indigo-600">Approach</a>
+                <a href="#projects" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-indigo-600">Projects</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-indigo-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+            <div class="md:flex items-center justify-between">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6">Building Digital Solutions That Scale</h1>
+                    <p class="text-xl mb-8 opacity-90">We combine service excellence with product innovation to create sustainable digital value.</p>
+                    <div class="flex space-x-4">
+                        <a href="#contact" class="bg-white text-indigo-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition duration-300">Get Started</a>
+                        <a href="#services" class="border-2 border-white text-white hover:bg-white hover:text-indigo-600 px-6 py-3 rounded-lg font-medium transition duration-300">Our Services</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="https://illustrations.popsy.co/amber/developer-activity.svg" alt="Developer Illustration" class="w-full max-w-md animate-float">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Comprehensive Services</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">From custom development to scalable products, we cover the full digital spectrum.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-white rounded-xl shadow-md overflow-hidden p-6 transition duration-300">
+                    <div class="text-indigo-600 mb-4">
+                        <i class="fas fa-laptop-code text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Custom Development</h3>
+                    <p class="text-gray-600 mb-4">We build tailored apps and websites for individuals and businesses, ensuring perfect fit for your needs.</p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Personal portfolios & blogs</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Business websites & apps</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>E-commerce solutions</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-white rounded-xl shadow-md overflow-hidden p-6 transition duration-300">
+                    <div class="text-indigo-600 mb-4">
+                        <i class="fas fa-robot text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Business Automation</h3>
+                    <p class="text-gray-600 mb-4">We create intelligent systems that streamline your operations and boost productivity.</p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Custom CRM solutions</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Workflow automation</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>AI-powered agents</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-white rounded-xl shadow-md overflow-hidden p-6 transition duration-300">
+                    <div class="text-indigo-600 mb-4">
+                        <i class="fas fa-boxes text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Product Development</h3>
+                    <p class="text-gray-600 mb-4">We build market-ready digital products that solve real problems and generate revenue.</p>
+                    <ul class="text-gray-600 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>SaaS platforms</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>API services</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Digital tools</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Approach Section -->
+    <section id="approach" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Unique Approach</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">We combine service excellence with product innovation for maximum impact.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-indigo-100 text-indigo-600 rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4">1</div>
+                        <h3 class="text-xl font-bold text-gray-900">Service Excellence</h3>
+                    </div>
+                    <p class="text-gray-600">We start by delivering exceptional development services to clients, building our expertise and reputation in the market.</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-indigo-100 text-indigo-600 rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4">2</div>
+                        <h3 class="text-xl font-bold text-gray-900">Product Innovation</h3>
+                    </div>
+                    <p class="text-gray-600">We identify recurring needs and develop them into standalone products that can serve multiple clients.</p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-indigo-100 text-indigo-600 rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4">3</div>
+                        <h3 class="text-xl font-bold text-gray-900">Business Scaling</h3>
+                    </div>
+                    <p class="text-gray-600">Successful products are scaled into full-fledged businesses that can operate independently or be sold.</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 bg-indigo-50 rounded-xl p-8 md:p-12">
+                <div class="md:flex items-center">
+                    <div class="md:w-1/2 mb-8 md:mb-0">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">The Code 9 Advantage</h3>
+                        <p class="text-gray-700 mb-6">Our hybrid model allows us to maintain financial stability through services while pursuing high-growth opportunities through products.</p>
+                        <div class="flex items-center">
+                            <div class="bg-indigo-100 text-indigo-600 p-3 rounded-lg mr-4">
+                                <i class="fas fa-lightbulb text-2xl"></i>
+                            </div>
+                            <p class="text-gray-700 font-medium">We turn client work into product opportunities</p>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <img src="https://illustrations.popsy.co/amber/business-plan.svg" alt="Business Strategy" class="w-full max-w-md mx-auto">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Featured Projects</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Explore our flagship initiatives that showcase our capabilities.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Project 1 -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-md">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-indigo-100 text-indigo-600 p-3 rounded-lg mr-4">
+                                <i class="fas fa-brain text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">AI Dev Tool</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">An intelligent assistant that helps developers write better code faster, with AI-powered suggestions and debugging.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full text-sm">AI</span>
+                            <span class="bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full text-sm">Developer Tools</span>
+                            <span class="bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full text-sm">Productivity</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-md">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-indigo-100 text-indigo-600 p-3 rounded-lg mr-4">
+                                <i class="fas fa-store text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Digital Dropshipping</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">A platform for reselling digital products with automated fulfillment, creating passive income streams.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full text-sm">E-commerce</span>
+                            <span class="bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full text-sm">Automation</span>
+                            <span class="bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full text-sm">Passive Income</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-indigo-600 text-white rounded-xl p-8 md:p-12">
+                <div class="md:flex items-center">
+                    <div class="md:w-2/3 mb-8 md:mb-0">
+                        <h3 class="text-2xl font-bold mb-4">Have a project in mind?</h3>
+                        <p class="mb-6 opacity-90">Whether you need a custom solution or want to explore our products, we'd love to hear from you.</p>
+                        <a href="#contact" class="bg-white text-indigo-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium inline-block transition duration-300">Get in Touch</a>
+                    </div>
+                    <div class="md:w-1/3 flex justify-center">
+                        <i class="fas fa-paper-plane text-6xl opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Let's Build Something Amazing</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Ready to discuss your project or learn more about our services?</p>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-1/2 gradient-bg text-white p-8 md:p-12">
+                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="mr-4 mt-1">
+                                    <i class="fas fa-envelope text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Email Us</h4>
+                                    <p>hello@code9.dev</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="mr-4 mt-1">
+                                    <i class="fas fa-map-marker-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Location</h4>
+                                    <p>Digital Headquarters - Serving Clients Worldwide</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="mr-4 mt-1">
+                                    <i class="fas fa-clock text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Hours</h4>
+                                    <p>Monday - Friday: 9am - 6pm</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-12">
+                            <h4 class="font-bold mb-4">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="bg-white text-indigo-600 hover:bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="bg-white text-indigo-600 hover:bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="bg-white text-indigo-600 hover:bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 p-8 md:p-12">
+                        <form class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                            <div>
+                                <label for="service" class="block text-sm font-medium text-gray-700 mb-1">Service Interest</label>
+                                <select id="service" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                    <option value="">Select a service</option>
+                                    <option value="custom-development">Custom Development</option>
+                                    <option value="automation">Business Automation</option>
+                                    <option value="product-development">Product Development</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                            </div>
+                            <button type="submit" class="w-full gradient-bg text-white py-3 px-6 rounded-lg font-medium hover:opacity-90 transition duration-300">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="md:flex md:justify-between">
+                <div class="mb-8 md:mb-0">
+                    <h3 class="text-2xl font-bold mb-4">CODE 9</h3>
+                    <p class="text-gray-400 max-w-xs">Building digital solutions that scale through services, products, and innovation.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="text-sm font-semibold uppercase tracking-wider mb-4">Services</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Custom Development</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Business Automation</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Product Development</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold uppercase tracking-wider mb-4">Company</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#approach" class="text-gray-400 hover:text-white transition duration-300">Our Approach</a></li>
+                            <li><a href="#projects" class="text-gray-400 hover:text-white transition duration-300">Projects</a></li>
+                            <li><a href="#contact" class="text-gray-400 hover:text-white transition duration-300">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold uppercase tracking-wider mb-4">Legal</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Privacy Policy</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">© 2023 Code 9. All rights reserved.</p>
+                <div class="mt-4 md:mt-0 flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // Form submission handling
+        const contactForm = document.querySelector('form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Here you would typically send the form data to a server
+                alert('Thank you for your message! We will get back to you soon.');
+                this.reset();
+            });
+        }
+    </script>
+</body>
+</html>
