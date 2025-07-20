@@ -4,33 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code 9 | Software Development & Digital Solutions</title>
-    <!-- Add Google Fonts for modern typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Add AOS for scroll animations -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Update font family */
         body {
             font-family: 'Inter', sans-serif;
+            line-height: 1.6;
         }
-
-        /* Refined gradient background */
         .gradient-bg {
             background: linear-gradient(135deg, #5a67d8 0%, #9f7aea 100%);
         }
-
-        /* Enhanced service card hover effect */
         .service-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .dark-mode .service-card {
+            background: rgba(45, 55, 72, 0.95);
         }
         .service-card:hover {
             transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
-
-        /* Float animation for hero image */
         .animate-float {
             animation: float 5s ease-in-out infinite;
         }
@@ -38,15 +35,6 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
         }
-
-        /* Parallax effect for hero section */
-        .hero-parallax {
-            background-attachment: fixed;
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* Back to Top button */
         #back-to-top {
             position: fixed;
             bottom: 20px;
@@ -69,14 +57,11 @@
         #back-to-top:hover {
             transform: scale(1.1);
         }
-
-        /* Form input focus animation */
         input:focus, select:focus, textarea:focus {
             transform: scale(1.01);
-            transition: transform 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 0 0 3px rgba(90, 103, 216, 0.3);
         }
-
-        /* Dark mode styles */
         .dark-mode {
             background-color: #1a202c;
             color: #e2e8f0;
@@ -93,8 +78,6 @@
         .dark-mode .gradient-bg {
             background: linear-gradient(135deg, #2b6cb0 0%, #6b46c1 100%);
         }
-
-        /* Preloader */
         #preloader {
             position: fixed;
             top: 0;
@@ -124,26 +107,168 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        /* Scroll progress bar */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: #5a67d8;
+            width: 0;
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+        /* Animated form labels */
+        .form-group {
+            position: relative;
+        }
+        .form-group label {
+            position: absolute;
+            top: 0.75rem;
+            left: 1rem;
+            transition: all 0.2s ease;
+            color: #6b7280;
+        }
+        .form-group input:focus + label,
+        .form-group input:not(:placeholder-shown) + label,
+        .form-group textarea:focus + label,
+        .form-group textarea:not(:placeholder-shown) + label {
+            top: -0.75rem;
+            left: 0.75rem;
+            font-size: 0.75rem;
+            color: #5a67d8;
+        }
+        .dark-mode .form-group label {
+            color: #a0aec0;
+        }
+        .dark-mode .form-group input:focus + label,
+        .dark-mode .form-group input:not(:placeholder-shown) + label,
+        .dark-mode .form-group textarea:focus + label,
+        .dark-mode .form-group textarea:not(:placeholder-shown) + label {
+            color: #9f7aea;
+        }
+        /* Pulse animation for CTA */
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        /* Logo hover effect */
+        .logo:hover {
+            transform: rotate(5deg);
+            transition: transform 0.3s ease;
+        }
+        /* List item animation */
+        .service-card ul li {
+            opacity: 0;
+            transform: translateY(10px);
+            animation: slide-up 0.5s ease forwards;
+        }
+        .service-card ul li:nth-child(2) { animation-delay: 0.1s; }
+        .service-card ul li:nth-child(3) { animation-delay: 0.2s; }
+        @keyframes slide-up {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Gradient button border */
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(to right, #5a67d8, #9f7aea);
+            padding: 2px;
+            border-radius: 0.5rem;
+        }
+        .gradient-border > * {
+            background: white;
+            border-radius: 0.5rem;
+            transition: background 0.3s ease;
+        }
+        .dark-mode .gradient-border > * {
+            background: #2d3748;
+        }
+        .gradient-border:hover > * {
+            background: #f7fafc;
+        }
+        .dark-mode .gradient-border:hover > * {
+            background: #4a5568;
+        }
+        /* Tooltip styles */
+        .tooltip {
+            position: relative;
+        }
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2d3748;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+        .tooltip:hover::after {
+            opacity: 1;
+        }
+        /* Chat widget loading */
+        #chat-loader {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            background: #5a67d8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9998;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        #chat-loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Preloader -->
     <div id="preloader">
         <div class="loader"></div>
     </div>
-
-    <!-- Dark Mode Toggle -->
+    <div id="chat-loader">
+        <div class="loader"></div>
+    </div>
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        Tawk_API.onLoad = function() {
+            document.getElementById('chat-loader').classList.add('hidden');
+        };
+        (function() {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/687d7198fcac9d191f156ac2/1j0l07f14';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+    <div id="scroll-progress"></div>
     <button id="dark-mode-toggle" class="fixed top-4 right-4 z-50 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white p-2 rounded-full">
         <i class="fas fa-moon"></i>
     </button>
-
-    <!-- Navigation -->
     <nav class="bg-white dark:bg-gray-800 shadow-lg sticky top-0 z-50" data-aos="fade-down">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center">
-                        <span class="text-indigo-600 dark:text-indigo-400 font-bold text-2xl">CODE 9</span>
+                        <span class="text-indigo-600 dark:text-indigo-400 font-bold text-2xl logo">CODE 9</span>
                     </div>
                 </div>
                 <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
@@ -158,7 +283,6 @@
                     </button>
                 </div>
             </div>
-            <!-- Mobile menu -->
             <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
                 <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                     <a href="#services" class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">Services</a>
@@ -169,17 +293,19 @@
             </div>
         </div>
     </nav>
-
-    <!-- Hero Section -->
-    <section class="gradient-bg text-white hero-parallax" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c');" data-aos="fade-up">
+    <section class="gradient-bg text-white" data-aos="fade-up">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
             <div class="md:flex items-center justify-between">
                 <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-6">Building Digital Solutions That Scale</h1>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">Building Digital Solutions That Scale</h1>
                     <p class="text-xl mb-8 opacity-90">We combine service excellence with product innovation to create sustainable digital value.</p>
                     <div class="flex space-x-4">
-                        <a href="#contact" class="bg-white text-indigo-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition duration-300 transform hover:scale-105">Get Started</a>
-                        <a href="#services" class="border-2 border-white text-white hover:bg-white hover:text-indigo-600 px-6 py-3 rounded-lg font-medium transition duration-300 transform hover:scale-105">Our Services</a>
+                        <div class="gradient-border">
+                            <a href="#contact" class="block px-6 py-3 text-indigo-600 dark:text-indigo-400 font-medium transition duration-300 pulse">Get Started</a>
+                        </div>
+                        <div class="gradient-border">
+                            <a href="#services" class="block border-2 border-transparent text-white px-6 py-3 font-medium transition duration-300">Our Services</a>
+                        </div>
                     </div>
                 </div>
                 <div class="md:w-1/2 flex justify-center" data-aos="fade-left">
@@ -188,16 +314,16 @@
             </div>
         </div>
     </section>
-
-    <!-- Services Section -->
     <section id="services" class="py-20 bg-white dark:bg-gray-800" data-aos="fade-up">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Our Comprehensive Services</h2>
+            <div class="text-center mb-16" data-aos="zoom-in">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4 relative">
+                    Our Comprehensive Services
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-indigo-600 dark:bg-indigo-400"></span>
+                </h2>
                 <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">From custom development to scalable products, we cover the full digital spectrum.</p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Service 1 -->
                 <div class="service-card bg-white dark:bg-gray-700 rounded-xl shadow-md overflow-hidden p-6 transition duration-300" data-aos="zoom-in">
                     <div class="text-indigo-600 dark:text-indigo-400 mb-4 transform hover:scale-110 transition duration-300">
                         <i class="fas fa-laptop-code text-4xl"></i>
@@ -219,7 +345,6 @@
                         </li>
                     </ul>
                 </div>
-                <!-- Service 2 -->
                 <div class="service-card bg-white dark:bg-gray-700 rounded-xl shadow-md overflow-hidden p-6 transition duration-300" data-aos="zoom-in" data-aos-delay="100">
                     <div class="text-indigo-600 dark:text-indigo-400 mb-4 transform hover:scale-110 transition duration-300">
                         <i class="fas fa-robot text-4xl"></i>
@@ -241,7 +366,6 @@
                         </li>
                     </ul>
                 </div>
-                <!-- Service 3 -->
                 <div class="service-card bg-white dark:bg-gray-700 rounded-xl shadow-md overflow-hidden p-6 transition duration-300" data-aos="zoom-in" data-aos-delay="200">
                     <div class="text-indigo-600 dark:text-indigo-400 mb-4 transform hover:scale-110 transition duration-300">
                         <i class="fas fa-boxes text-4xl"></i>
@@ -266,33 +390,31 @@
             </div>
         </div>
     </section>
-
-    <!-- Approach Section -->
     <section id="approach" class="py-20 bg-gray-50 dark:bg-gray-900" data-aos="fade-up">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Our Unique Approach</h2>
+            <div class="text-center mb-16" data-aos="zoom-in">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4 relative">
+                    Our Unique Approach
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-indigo-600 dark:bg-indigo-400"></span>
+                </h2>
                 <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">We combine service excellence with product innovation for maximum impact.</p>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Step 1 -->
-                <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="100">
                     <div class="flex items-center mb-4">
                         <div class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4">1</div>
                         <h3 class="text-xl font-bold text-gray-900 dark:text-white">Service Excellence</h3>
                     </div>
                     <p class="text-gray-600 dark:text-gray-300">We start by delivering exceptional development services to clients, building our expertise and reputation in the market.</p>
                 </div>
-                <!-- Step 2 -->
-                <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="200">
                     <div class="flex items-center mb-4">
                         <div class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4">2</div>
                         <h3 class="text-xl font-bold text-gray-900 dark:text-white">Product Innovation</h3>
                     </div>
                     <p class="text-gray-600 dark:text-gray-300">We identify recurring needs and develop them into standalone products that can serve multiple clients.</p>
                 </div>
-                <!-- Step 3 -->
-                <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="300">
+                <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="300">
                     <div class="flex items-center mb-4">
                         <div class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4">3</div>
                         <h3 class="text-xl font-bold text-gray-900 dark:text-white">Business Scaling</h3>
@@ -319,17 +441,17 @@
             </div>
         </div>
     </section>
-
-    <!-- Projects Section -->
     <section id="projects" class="py-20 bg-white dark:bg-gray-800" data-aos="fade-up">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Featured Projects</h2>
+            <div class="text-center mb-16" data-aos="zoom-in">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4 relative">
+                    Featured Projects
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-indigo-600 dark:bg-indigo-400"></span>
+                </h2>
                 <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">Explore our flagship initiatives that showcase our capabilities.</p>
             </div>
             <div class="grid md:grid-cols-2 gap-8 mb-12">
-                <!-- Project 1 -->
-                <div class="bg-gray-50 dark:bg-gray-700 rounded-xl overflow-hidden shadow-md" data-aos="fade-right">
+                <div class="service-card bg-gray-50 dark:bg-gray-700 rounded-xl overflow-hidden shadow-md" data-aos="fade-right">
                     <div class="p-6">
                         <div class="flex items-center mb-4">
                             <div class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 p-3 rounded-lg mr-4 transform hover:scale-110 transition duration-300">
@@ -345,8 +467,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Project 2 -->
-                <div class="bg-gray-50 dark:bg-gray-700 rounded-xl overflow-hidden shadow-md" data-aos="fade-left">
+                <div class="service-card bg-gray-50 dark:bg-gray-700 rounded-xl overflow-hidden shadow-md" data-aos="fade-left">
                     <div class="p-6">
                         <div class="flex items-center mb-4">
                             <div class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 p-3 rounded-lg mr-4 transform hover:scale-110 transition duration-300">
@@ -368,7 +489,9 @@
                     <div class="md:w-2/3 mb-8 md:mb-0">
                         <h3 class="text-2xl font-bold mb-4">Have a project in mind?</h3>
                         <p class="mb-6 opacity-90">Whether you need a custom solution or want to explore our products, we'd love to hear from you.</p>
-                        <a href="#contact" class="bg-white text-indigo-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium inline-block transition duration-300 transform hover:scale-105">Get in Touch</a>
+                        <div class="gradient-border">
+                            <a href="#contact" class="block px-6 py-3 text-indigo-600 dark:text-indigo-400 font-medium transition duration-300">Get in Touch</a>
+                        </div>
                     </div>
                     <div class="md:w-1/3 flex justify-center">
                         <i class="fas fa-paper-plane text-6xl opacity-50 animate-pulse"></i>
@@ -377,12 +500,13 @@
             </div>
         </div>
     </section>
-
-    <!-- Contact Section -->
     <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-900" data-aos="fade-up">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Let's Build Something Amazing</h2>
+            <div class="text-center mb-16" data-aos="zoom-in">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4 relative">
+                    Let's Build Something Amazing
+                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-indigo-600 dark:bg-indigo-400"></span>
+                </h2>
                 <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">Ready to discuss your project or learn more about our services?</p>
             </div>
             <div class="bg-white dark:bg-gray-700 rounded-xl shadow-md overflow-hidden">
@@ -421,13 +545,13 @@
                         <div class="mt-12">
                             <h4 class="font-bold mb-4">Follow Us</h4>
                             <div class="flex space-x-4">
-                                <a href="#" class="bg-white text-indigo-600 hover:bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center transition duration-300 transform hover:scale-110">
+                                <a href="#" class="bg-white text-indigo-600 hover:bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center transition duration-300 transform hover:scale-110 tooltip" data-tooltip="Twitter">
                                     <i class="fab fa-twitter"></i>
                                 </a>
-                                <a href="#" class="bg-white text-indigo-600 hover:bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center transition duration-300 transform hover:scale-110">
+                                <a href="#" class="bg-white text-indigo-600 hover:bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center transition duration-300 transform hover:scale-110 tooltip" data-tooltip="LinkedIn">
                                     <i class="fab fa-linkedin-in"></i>
                                 </a>
-                                <a href="#" class="bg-white text-indigo-600 hover:bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center transition duration-300 transform hover:scale-110">
+                                <a href="#" class="bg-white text-indigo-600 hover:bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center transition duration-300 transform hover:scale-110 tooltip" data-tooltip="GitHub">
                                     <i class="fab fa-github"></i>
                                 </a>
                             </div>
@@ -435,18 +559,17 @@
                     </div>
                     <div class="md:w-1/2 p-8 md:p-12">
                         <form id="contact-form" class="space-y-6">
-                            <div>
-                                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Your Name</label>
-                                <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-white" required>
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" placeholder=" " class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-white" required>
+                                <label for="name" class="block text-sm font-medium">Your Name</label>
                                 <p class="text-red-500 text-sm mt-1 hidden error-message">Please enter your name.</p>
                             </div>
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email Address</label>
-                                <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-white" required>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" placeholder=" " class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-white" required>
+                                <label for="email" class="block text-sm font-medium">Email Address</label>
                                 <p class="text-red-500 text-sm mt-1 hidden error-message">Please enter a valid email address.</p>
                             </div>
-                            <div>
-                                <label for="service" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Service Interest</label>
+                            <div class="form-group">
                                 <select id="service" name="service" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-white">
                                     <option value="">Select a service</option>
                                     <option value="custom-development">Custom Development</option>
@@ -456,9 +579,9 @@
                                 </select>
                                 <p class="text-red-500 text-sm mt-1 hidden error-message">Please select a service.</p>
                             </div>
-                            <div>
-                                <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Your Message</label>
-                                <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-white" required></textarea>
+                            <div class="form-group">
+                                <textarea id="message" name="message" rows="4" placeholder=" " class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-white" required></textarea>
+                                <label for="message" class="block text-sm font-medium">Your Message</label>
                                 <p class="text-red-500 text-sm mt-1 hidden error-message">Please enter a message.</p>
                             </div>
                             <button type="submit" class="w-full gradient-bg text-white py-3 px-6 rounded-lg font-medium hover:opacity-90 transition duration-300 transform hover:scale-105">Send Message</button>
@@ -468,8 +591,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12" data-aos="fade-up">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="md:flex md:justify-between">
@@ -506,51 +627,43 @@
             <div class="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
                 <p class="text-gray-400 text-sm">© 2025 Code 9. All rights reserved.</p>
                 <div class="mt-4 md:mt-0 flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300 transform hover:scale-110">
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300 transform hover:scale-110 tooltip" data-tooltip="Twitter">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300 transform hover:scale-110">
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300 transform hover:scale-110 tooltip" data-tooltip="LinkedIn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300 transform hover:scale-110">
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300 transform hover:scale-110 tooltip" data-tooltip="GitHub">
                         <i class="fab fa-github"></i>
                     </a>
                 </div>
             </div>
         </div>
     </footer>
-
-    <!-- Back to Top Button -->
     <a href="#" id="back-to-top" class="hidden">
         <i class="fas fa-arrow-up"></i>
     </a>
-
-    <!-- Scripts -->
+    <a href="#contact" class="fixed bottom-20 right-4 z-50 bg-indigo-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-105">
+        Contact Us
+    </a>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Initialize AOS
         AOS.init({
             duration: 800,
             once: true,
         });
-
-        // Preloader
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
             setTimeout(() => {
                 preloader.classList.add('hidden');
             }, 1000);
         });
-
-        // Mobile menu toggle
         document.getElementById('menu-toggle').addEventListener('click', () => {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         });
-
-        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 if (targetId === '#') return;
@@ -561,49 +674,55 @@
                 }
             });
         });
-
-        // Back to Top button
         const backToTop = document.getElementById('back-to-top');
+        const scrollProgress = document.getElementById('scroll-progress');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 300) {
                 backToTop.classList.add('visible');
             } else {
                 backToTop.classList.remove('visible');
             }
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
         });
-
-        // Dark mode toggle
         const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const prefersDark = localStorage.getItem('dark-mode') === 'true';
+        if (prefersDark) {
+            document.body.classList.add('dark-mode');
+            darkModeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+        }
         darkModeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
             const icon = darkModeToggle.querySelector('i');
             icon.classList.toggle('fa-moon');
             icon.classList.toggle('fa-sun');
+            localStorage.setItem('dark-mode', document.body.classList.contains('dark-mode'));
         });
-
-        // Form validation
         const contactForm = document.getElementById('contact-form');
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             let isValid = true;
             const inputs = contactForm.querySelectorAll('input, select, textarea');
             inputs.forEach(input => {
-                const errorMessage = input.nextElementSibling;
+                const errorMessage = input.parentElement.querySelector('.error-message');
                 if (!input.value.trim()) {
                     errorMessage.classList.remove('hidden');
+                    input.classList.add('border-red-500');
                     isValid = false;
                 } else {
                     errorMessage.classList.add('hidden');
+                    input.classList.remove('border-red-500');
                     if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
                         errorMessage.textContent = 'Please enter a valid email address.';
                         errorMessage.classList.remove('hidden');
+                        input.classList.add('border-red-500');
                         isValid = false;
                     }
                 }
             });
-
             if (isValid) {
-                // Simulate form submission
                 contactForm.classList.add('opacity-50', 'pointer-events-none');
                 setTimeout(() => {
                     alert('Thank you for your message! We will get back to you soon.');
@@ -611,6 +730,15 @@
                     contactForm.classList.remove('opacity-50', 'pointer-events-none');
                 }, 1000);
             }
+        });
+        contactForm.querySelectorAll('input, textarea').forEach(input => {
+            input.addEventListener('input', () => {
+                const errorMessage = input.parentElement.querySelector('.error-message');
+                if (input.value.trim()) {
+                    errorMessage.classList.add('hidden');
+                    input.classList.remove('border-red-500');
+                }
+            });
         });
     </script>
 </body>
