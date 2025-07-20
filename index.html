@@ -54,13 +54,14 @@
             opacity: 1;
             transform: translateY(0);
         }
-        #back-to-top:hover {
+        #back-to-top:hover, #back-to-top:focus {
             transform: scale(1.1);
         }
         input:focus, select:focus, textarea:focus {
             transform: scale(1.01);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             box-shadow: 0 0 0 3px rgba(90, 103, 216, 0.3);
+            outline: none;
         }
         .dark-mode {
             background-color: #1a202c;
@@ -107,7 +108,6 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        /* Scroll progress bar */
         #scroll-progress {
             position: fixed;
             top: 0;
@@ -118,7 +118,6 @@
             z-index: 1000;
             transition: width 0.3s ease;
         }
-        /* Animated form labels */
         .form-group {
             position: relative;
         }
@@ -128,6 +127,7 @@
             left: 1rem;
             transition: all 0.2s ease;
             color: #6b7280;
+            pointer-events: none;
         }
         .form-group input:focus + label,
         .form-group input:not(:placeholder-shown) + label,
@@ -147,7 +147,6 @@
         .dark-mode .form-group textarea:not(:placeholder-shown) + label {
             color: #9f7aea;
         }
-        /* Pulse animation for CTA */
         .pulse {
             animation: pulse 2s ease-in-out infinite;
         }
@@ -155,12 +154,10 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
         }
-        /* Logo hover effect */
         .logo:hover {
             transform: rotate(5deg);
             transition: transform 0.3s ease;
         }
-        /* List item animation */
         .service-card ul li {
             opacity: 0;
             transform: translateY(10px);
@@ -171,7 +168,6 @@
         @keyframes slide-up {
             to { opacity: 1; transform: translateY(0); }
         }
-        /* Gradient button border */
         .gradient-border {
             position: relative;
             background: linear-gradient(to right, #5a67d8, #9f7aea);
@@ -186,13 +182,12 @@
         .dark-mode .gradient-border > * {
             background: #2d3748;
         }
-        .gradient-border:hover > * {
+        .gradient-border:hover > *, .gradient-border:focus-within > * {
             background: #f7fafc;
         }
-        .dark-mode .gradient-border:hover > * {
+        .dark-mode .gradient-border:hover > *, .dark-mode .gradient-border:focus-within > * {
             background: #4a5568;
         }
-        /* Tooltip styles */
         .tooltip {
             position: relative;
         }
@@ -210,11 +205,11 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.2s ease;
+            white-space: nowrap;
         }
-        .tooltip:hover::after {
+        .tooltip:hover::after, .tooltip:focus::after {
             opacity: 1;
         }
-        /* Chat widget loading */
         #chat-loader {
             position: fixed;
             bottom: 20px;
@@ -235,40 +230,44 @@
             pointer-events: none;
         }
     </style>
+    <noscript>
+        <style>
+            #preloader { display: none; }
+            body { visibility: visible; }
+        </style>
+    </noscript>
 </head>
 <body class="bg-gray-50">
-    <div id="preloader">
+    <div id="preloader" aria-hidden="true">
         <div class="loader"></div>
     </div>
-    <div id="chat-loader">
+    <div id="chat-loader" aria-hidden="true">
         <div class="loader"></div>
     </div>
     <!--Start of Tawk.to Script-->
-    <script type="text/javascript">
-        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-        Tawk_API.onLoad = function() {
-            document.getElementById('chat-loader').classList.add('hidden');
-        };
-        (function() {
-            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-            s1.async = true;
-            s1.src = 'https://embed.tawk.to/687d7198fcac9d191f156ac2/1j0l07f14';
-            s1.charset = 'UTF-8';
-            s1.setAttribute('crossorigin', '*');
-            s0.parentNode.insertBefore(s1, s0);
-        })();
-    </script>
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/687d7198fcac9d191f156ac2/1j0l07f14';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
     <!--End of Tawk.to Script-->
-    <div id="scroll-progress"></div>
-    <button id="dark-mode-toggle" class="fixed top-4 right-4 z-50 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white p-2 rounded-full">
+    <div id="scroll-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+    <button id="dark-mode-toggle" class="fixed top-4 right-4 z-50 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500" aria-label="Toggle dark mode">
         <i class="fas fa-moon"></i>
     </button>
-    <nav class="bg-white dark:bg-gray-800 shadow-lg sticky top-0 z-50" data-aos="fade-down">
+    <nav class="bg-white dark:bg-gray-800 shadow-lg sticky top-0 z-50" data-aos="fade-down" role="navigation">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center">
-                        <span class="text-indigo-600 dark:text-indigo-400 font-bold text-2xl logo">CODE 9</span>
+                        <span class="text-indigo-600 dark:text-indigo-400 font-bold text-2xl logo" aria-label="Code 9 Logo">CODE 9</span>
                     </div>
                 </div>
                 <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
@@ -278,319 +277,322 @@
                     <a href="#contact" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 text-sm font-medium transition duration-200">Contact</a>
                 </div>
                 <div class="md:hidden flex items-center">
-                    <button id="menu-toggle" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">
+                    <button id="menu-toggle" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500" aria-label="Toggle mobile menu" aria-expanded="false">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
-            <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+            <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700" role="menu">
                 <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                    <a href="#services" class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">Services</a>
-                    <a href="#approach" class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">Approach</a>
-                    <a href="#projects" class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">Projects</a>
-                    <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">Contact</a>
+                    <a href="#services" class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400" role="menuitem">Services</a>
+                    <a href="#approach" class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400" role="menuitem">Approach</a>
+                    <a href="#projects" class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400" role="menuitem">Projects</a>
+                    <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400" role="menuitem">Contact</a>
                 </div>
             </div>
         </div>
     </nav>
-    <section class="gradient-bg text-white" data-aos="fade-up">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
-            <div class="md:flex items-center justify-between">
-                <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">Building Digital Solutions That Scale</h1>
-                    <p class="text-xl mb-8 opacity-90">We combine service excellence with product innovation to create sustainable digital value.</p>
-                    <div class="flex space-x-4">
-                        <div class="gradient-border">
-                            <a href="#contact" class="block px-6 py-3 text-indigo-600 dark:text-indigo-400 font-medium transition duration-300 pulse">Get Started</a>
-                        </div>
-                        <div class="gradient-border">
-                            <a href="#services" class="block border-2 border-transparent text-white px-6 py-3 font-medium transition duration-300">Our Services</a>
-                        </div>
+    <main>
+        <section class="gradient-bg text-white" data-aos="fade-up">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+        <div class="md:flex items-center justify-between">
+            <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">Building Digital Solutions That Scale</h1>
+                <p class="text-xl mb-8 opacity-90">We combine service excellence with product innovation to create sustainable digital value.</p>
+                <div class="flex space-x-4">
+                    <div class="gradient-border">
+                        <a href="#contact" class="block px-6 py-3 text-indigo-600 dark:text-indigo-400 font-medium transition duration-300 pulse">Get Started</a>
+                    </div>
+                    <div class="gradient-border">
+                        <a href="#services" class="block border-2 border-transparent text-white px-6 py-3 font-medium transition duration-300">Our Services</a>
                     </div>
                 </div>
-                <div class="md:w-1/2 flex justify-center" data-aos="fade-left">
-                    <img src="https://illustrations.popsy.co/amber/developer-working.svg" alt="Developer Illustration" class="w-full max-w-md animate-float">
-                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center" data-aos="fade-left">
+                <img src="code9.jpg" alt="Developer working at computer" class="w-full max-w-[80%] sm:max-w-[60%] md:max-w-[50%] lg:max-w-[40%] h-auto object-contain animate-float" loading="lazy">
             </div>
         </div>
-    </section>
-    <section id="services" class="py-20 bg-white dark:bg-gray-800" data-aos="fade-up">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="zoom-in">
-                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4 relative">
-                    Our Comprehensive Services
-                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-indigo-600 dark:bg-indigo-400"></span>
-                </h2>
-                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">From custom development to scalable products, we cover the full digital spectrum.</p>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="service-card bg-white dark:bg-gray-700 rounded-xl shadow-md overflow-hidden p-6 transition duration-300" data-aos="zoom-in">
-                    <div class="text-indigo-600 dark:text-indigo-400 mb-4 transform hover:scale-110 transition duration-300">
-                        <i class="fas fa-laptop-code text-4xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Custom Development</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">We build tailored apps and websites for individuals and businesses, ensuring perfect fit for your needs.</p>
-                    <ul class="text-gray-600 dark:text-gray-300 space-y-2">
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Personal portfolios & blogs</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Business websites & apps</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>E-commerce solutions</span>
-                        </li>
-                    </ul>
+    </div>
+
+        </section>
+        <section id="services" class="py-20 bg-white dark:bg-gray-800" data-aos="fade-up">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16" data-aos="zoom-in">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4 relative">
+                        Our Comprehensive Services
+                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-indigo-600 dark:bg-indigo-400"></span>
+                    </h2>
+                    <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">From custom development to scalable products, we cover the full digital spectrum.</p>
                 </div>
-                <div class="service-card bg-white dark:bg-gray-700 rounded-xl shadow-md overflow-hidden p-6 transition duration-300" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="text-indigo-600 dark:text-indigo-400 mb-4 transform hover:scale-110 transition duration-300">
-                        <i class="fas fa-robot text-4xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Business Automation</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">We create intelligent systems that streamline your operations and boost productivity.</p>
-                    <ul class="text-gray-600 dark:text-gray-300 space-y-2">
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Custom CRM solutions</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Workflow automation</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>AI-powered agents</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="service-card bg-white dark:bg-gray-700 rounded-xl shadow-md overflow-hidden p-6 transition duration-300" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="text-indigo-600 dark:text-indigo-400 mb-4 transform hover:scale-110 transition duration-300">
-                        <i class="fas fa-boxes text-4xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Product Development</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">We build market-ready digital products that solve real problems and generate revenue.</p>
-                    <ul class="text-gray-600 dark:text-gray-300 space-y-2">
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>SaaS platforms</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>API services</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Digital tools</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="approach" class="py-20 bg-gray-50 dark:bg-gray-900" data-aos="fade-up">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="zoom-in">
-                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4 relative">
-                    Our Unique Approach
-                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-indigo-600 dark:bg-indigo-400"></span>
-                </h2>
-                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">We combine service excellence with product innovation for maximum impact.</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="100">
-                    <div class="flex items-center mb-4">
-                        <div class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4">1</div>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Service Excellence</h3>
-                    </div>
-                    <p class="text-gray-600 dark:text-gray-300">We start by delivering exceptional development services to clients, building our expertise and reputation in the market.</p>
-                </div>
-                <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="200">
-                    <div class="flex items-center mb-4">
-                        <div class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4">2</div>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Product Innovation</h3>
-                    </div>
-                    <p class="text-gray-600 dark:text-gray-300">We identify recurring needs and develop them into standalone products that can serve multiple clients.</p>
-                </div>
-                <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="300">
-                    <div class="flex items-center mb-4">
-                        <div class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4">3</div>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Business Scaling</h3>
-                    </div>
-                    <p class="text-gray-600 dark:text-gray-300">Successful products are scaled into full-fledged businesses that can operate independently or be sold.</p>
-                </div>
-            </div>
-            <div class="mt-16 bg-indigo-50 dark:bg-indigo-900 rounded-xl p-8 md:p-12" data-aos="fade-up">
-                <div class="md:flex items-center">
-                    <div class="md:w-1/2 mb-8 md:mb-0">
-                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">The Code 9 Advantage</h3>
-                        <p class="text-gray-700 dark:text-gray-300 mb-6">Our hybrid model allows us to maintain financial stability through services while pursuing high-growth opportunities through products.</p>
-                        <div class="flex items-center">
-                            <div class="bg-indigo-100 dark:bg-indigo-800 text-indigo-600 dark:text-indigo-400 p-3 rounded-lg mr-4 transform hover:scale-110 transition duration-300">
-                                <i class="fas fa-lightbulb text-2xl"></i>
-                            </div>
-                            <p class="text-gray-700 dark:text-gray-300 font-medium">We turn client work into product opportunities</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="service-card bg-white dark:bg-gray-700 rounded-xl shadow-md overflow-hidden p-6 transition duration-300" data-aos="zoom-in">
+                        <div class="text-indigo-600 dark:text-indigo-400 mb-4 transform hover:scale-110 transition duration-300">
+                            <i class="fas fa-laptop-code text-4xl" aria-hidden="true"></i>
                         </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Custom Development</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">We build tailored apps and websites for individuals and businesses, ensuring perfect fit for your needs.</p>
+                        <ul class="text-gray-600 dark:text-gray-300 space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2" aria-hidden="true"></i>
+                                <span>Personal portfolios & blogs</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2" aria-hidden="true"></i>
+                                <span>Business websites & apps</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2" aria-hidden="true"></i>
+                                <span>E-commerce solutions</span>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="md:w-1/2">
-                        <img src="https://illustrations.popsy.co/amber/business-plan.svg" alt="Business Strategy" class="w-full max-w-md mx-auto animate-float">
+                    <div class="service-card bg-white dark:bg-gray-700 rounded-xl shadow-md overflow-hidden p-6 transition duration-300" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="text-indigo-600 dark:text-indigo-400 mb-4 transform hover:scale-110 transition duration-300">
+                            <i class="fas fa-robot text-4xl" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Business Automation</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">We create intelligent systems that streamline your operations and boost productivity.</p>
+                        <ul class="text-gray-600 dark:text-gray-300 space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2" aria-hidden="true"></i>
+                                <span>Custom CRM solutions</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2" aria-hidden="true"></i>
+                                <span>Workflow automation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2" aria-hidden="true"></i>
+                                <span>AI-powered agents</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="service-card bg-white dark:bg-gray-700 rounded-xl shadow-md overflow-hidden p-6 transition duration-300" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="text-indigo-600 dark:text-indigo-400 mb-4 transform hover:scale-110 transition duration-300">
+                            <i class="fas fa-boxes text-4xl" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Product Development</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">We build market-ready digital products that solve real problems and generate revenue.</p>
+                        <ul class="text-gray-600 dark:text-gray-300 space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2" aria-hidden="true"></i>
+                                <span>SaaS platforms</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2" aria-hidden="true"></i>
+                                <span>API services</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2" aria-hidden="true"></i>
+                                <span>Digital tools</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section id="projects" class="py-20 bg-white dark:bg-gray-800" data-aos="fade-up">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="zoom-in">
-                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4 relative">
-                    Featured Projects
-                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-indigo-600 dark:bg-indigo-400"></span>
-                </h2>
-                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">Explore our flagship initiatives that showcase our capabilities.</p>
-            </div>
-            <div class="grid md:grid-cols-2 gap-8 mb-12">
-                <div class="service-card bg-gray-50 dark:bg-gray-700 rounded-xl overflow-hidden shadow-md" data-aos="fade-right">
-                    <div class="p-6">
+        </section>
+        <section id="approach" class="py-20 bg-gray-50 dark:bg-gray-900" data-aos="fade-up">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16" data-aos="zoom-in">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4 relative">
+                        Our Unique Approach
+                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-indigo-600 dark:bg-indigo-400"></span>
+                    </h2>
+                    <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">We combine service excellence with product innovation for maximum impact.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="100">
                         <div class="flex items-center mb-4">
-                            <div class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 p-3 rounded-lg mr-4 transform hover:scale-110 transition duration-300">
-                                <i class="fas fa-brain text-2xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">AI Dev Tool</h3>
+                            <div class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4">1</div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Service Excellence</h3>
                         </div>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">An intelligent assistant that helps developers write better code faster, with AI-powered suggestions and debugging.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 px-3 py-1 rounded-full text-sm">AI</span>
-                            <span class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 px-3 py-1 rounded-full text-sm">Developer Tools</span>
-                            <span class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 px-3 py-1 rounded-full text-sm">Productivity</span>
-                        </div>
+                        <p class="text-gray-600 dark:text-gray-300">We start by delivering exceptional development services to clients, building our expertise and reputation in the market.</p>
                     </div>
-                </div>
-                <div class="service-card bg-gray-50 dark:bg-gray-700 rounded-xl overflow-hidden shadow-md" data-aos="fade-left">
-                    <div class="p-6">
+                    <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="200">
                         <div class="flex items-center mb-4">
-                            <div class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 p-3 rounded-lg mr-4 transform hover:scale-110 transition duration-300">
-                                <i class="fas fa-store text-2xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Digital Dropshipping</h3>
+                            <div class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4">2</div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Product Innovation</h3>
                         </div>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">A platform for reselling digital products with automated fulfillment, creating passive income streams.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 px-3 py-1 rounded-full text-sm">E-commerce</span>
-                            <span class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 px-3 py-1 rounded-full text-sm">Automation</span>
-                            <span class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 px-3 py-1 rounded-full text-sm">Passive Income</span>
+                        <p class="text-gray-600 dark:text-gray-300">We identify recurring needs and develop them into standalone products that can serve multiple clients.</p>
+                    </div>
+                    <div class="service-card bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="300">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4">3</div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Business Scaling</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300">Successful products are scaled into full-fledged businesses that can operate independently or be sold.</p>
+                    </div>
+                </div>
+                <div class="mt-16 bg-indigo-50 dark:bg-indigo-900 rounded-xl p-8 md:p-12" data-aos="fade-up">
+                    <div class="md:flex items-center">
+                        <div class="md:w-1/2 mb-8 md:mb-0">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">The Code 9 Advantage</h3>
+                            <p class="text-gray-700 dark:text-gray-300 mb-6">Our hybrid model allows us to maintain financial stability through services while pursuing high-growth opportunities through products.</p>
+                            <div class="flex items-center">
+                                <div class="bg-indigo-100 dark:bg-indigo-800 text-indigo-600 dark:text-indigo-400 p-3 rounded-lg mr-4 transform hover:scale-110 transition duration-300">
+                                    <i class="fas fa-lightbulb text-2xl" aria-hidden="true"></i>
+                                </div>
+                                <p class="text-gray-700 dark:text-gray-300 font-medium">We turn client work into product opportunities</p>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2">
+                            <img src="https://illustrations.popsy.co/amber/business-plan.svg" alt="Business strategy illustration" class="w-full max-w-md mx-auto animate-float">
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="bg-indigo-600 dark:bg-indigo-800 text-white rounded-xl p-8 md:p-12" data-aos="zoom-in">
-                <div class="md:flex items-center">
-                    <div class="md:w-2/3 mb-8 md:mb-0">
-                        <h3 class="text-2xl font-bold mb-4">Have a project in mind?</h3>
-                        <p class="mb-6 opacity-90">Whether you need a custom solution or want to explore our products, we'd love to hear from you.</p>
-                        <div class="gradient-border">
-                            <a href="#contact" class="block px-6 py-3 text-indigo-600 dark:text-indigo-400 font-medium transition duration-300">Get in Touch</a>
+        </section>
+        <section id="projects" class="py-20 bg-white dark:bg-gray-800" data-aos="fade-up">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16" data-aos="zoom-in">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4 relative">
+                        Featured Projects
+                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-indigo-600 dark:bg-indigo-400"></span>
+                    </h2>
+                    <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">Explore our flagship initiatives that showcase our capabilities.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <div class="service-card bg-gray-50 dark:bg-gray-700 rounded-xl overflow-hidden shadow-md" data-aos="fade-right">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 p-3 rounded-lg mr-4 transform hover:scale-110 transition duration-300">
+                                    <i class="fas fa-brain text-2xl" aria-hidden="true"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">AI Dev Tool</h3>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">An intelligent assistant that helps developers write better code faster, with AI-powered suggestions and debugging.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 px-3 py-1 rounded-full text-sm">AI</span>
+                                <span class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 px-3 py-1 rounded-full text-sm">Developer Tools</span>
+                                <span class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 px-3 py-1 rounded-full text-sm">Productivity</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="md:w-1/3 flex justify-center">
-                        <i class="fas fa-paper-plane text-6xl opacity-50 animate-pulse"></i>
+                    <div class="service-card bg-gray-50 dark:bg-gray-700 rounded-xl overflow-hidden shadow-md" data-aos="fade-left">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 p-3 rounded-lg mr-4 transform hover:scale-110 transition duration-300">
+                                    <i class="fas fa-store text-2xl" aria-hidden="true"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">Digital Dropshipping</h3>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">A platform for reselling digital products with automated fulfillment, creating passive income streams.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 px-3 py-1 rounded-full text-sm">E-commerce</span>
+                                <span class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 px-3 py-1 rounded-full text-sm">Automation</span>
+                                <span class="bg-indigo-100 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-400 px-3 py-1 rounded-full text-sm">Passive Income</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-indigo-600 dark:bg-indigo-800 text-white rounded-xl p-8 md:p-12" data-aos="zoom-in">
+                    <div class="md:flex items-center">
+                        <div class="md:w-2/3 mb-8 md:mb-0">
+                            <h3 class="text-2xl font-bold mb-4">Have a project in mind?</h3>
+                            <p class="mb-6 opacity-90">Whether you need a custom solution or want to explore our products, we'd love to hear from you.</p>
+                            <div class="gradient-border">
+                                <a href="#contact" class="block px-6 py-3 text-indigo-600 dark:text-indigo-400 font-medium transition duration-300">Get in Touch</a>
+                            </div>
+                        </div>
+                        <div class="md:w-1/3 flex justify-center">
+                            <i class="fas fa-paper-plane text-6xl opacity-50 animate-pulse" aria-hidden="true"></i>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-900" data-aos="fade-up">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="zoom-in">
-                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4 relative">
-                    Let's Build Something Amazing
-                    <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-indigo-600 dark:bg-indigo-400"></span>
-                </h2>
-                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">Ready to discuss your project or learn more about our services?</p>
-            </div>
-            <div class="bg-white dark:bg-gray-700 rounded-xl shadow-md overflow-hidden">
-                <div class="md:flex">
-                    <div class="md:w-1/2 gradient-bg text-white p-8 md:p-12">
-                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
-                        <div class="space-y-6">
-                            <div class="flex items-start">
-                                <div class="mr-4 mt-1">
-                                    <i class="fas fa-envelope text-xl transform hover:scale-110 transition duration-300"></i>
+        </section>
+        <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-900" data-aos="fade-up">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16" data-aos="zoom-in">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4 relative">
+                        Let's Build Something Amazing
+                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-indigo-600 dark:bg-indigo-400"></span>
+                    </h2>
+                    <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">Ready to discuss your project or learn more about our services?</p>
+                </div>
+                <div class="bg-white dark:bg-gray-700 rounded-xl shadow-md overflow-hidden">
+                    <div class="md:flex">
+                        <div class="md:w-1/2 gradient-bg text-white p-8 md:p-12">
+                            <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                            <div class="space-y-6">
+                                <div class="flex items-start">
+                                    <div class="mr-4 mt-1">
+                                        <i class="fas fa-envelope text-xl transform hover:scale-110 transition duration-300" aria-hidden="true"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold mb-1">Email Us</h4>
+                                        <p><a href="mailto:hello@code9.dev" class="hover:underline">hello@code9.dev</a></p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h4 class="font-bold mb-1">Email Us</h4>
-                                    <p>hello@code9.dev</p>
+                                <div class="flex items-start">
+                                    <div class="mr-4 mt-1">
+                                        <i class="fas fa-map-marker-alt text-xl transform hover:scale-110 transition duration-300" aria-hidden="true"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold mb-1">Location</h4>
+                                        <p>Digital Headquarters - Serving Clients Worldwide</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="mr-4 mt-1">
+                                        <i class="fas fa-clock text-xl transform hover:scale-110 transition duration-300" aria-hidden="true"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold mb-1">Hours</h4>
+                                        <p>Monday - Friday: 9am - 6pm</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="flex items-start">
-                                <div class="mr-4 mt-1">
-                                    <i class="fas fa-map-marker-alt text-xl transform hover:scale-110 transition duration-300"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold mb-1">Location</h4>
-                                    <p>Digital Headquarters - Serving Clients Worldwide</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="mr-4 mt-1">
-                                    <i class="fas fa-clock text-xl transform hover:scale-110 transition duration-300"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold mb-1">Hours</h4>
-                                    <p>Monday - Friday: 9am - 6pm</p>
+                            <div class="mt-12">
+                                <h4 class="font-bold mb-4">Follow Us</h4>
+                                <div class="flex space-x-4">
+                                    <a href="https://twitter.com/code9" class="bg-white text-indigo-600 hover:bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center transition duration-300 transform hover:scale-110 tooltip" data-tooltip="Twitter" aria-label="Follow us on Twitter">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <a href="https://linkedin.com/company/code9" class="bg-white text-indigo-600 hover:bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center transition duration-300 transform hover:scale-110 tooltip" data-tooltip="LinkedIn" aria-label="Follow us on LinkedIn">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                    <a href="https://github.com/code9" class="bg-white text-indigo-600 hover:bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center transition duration-300 transform hover:scale-110 tooltip" data-tooltip="GitHub" aria-label="Follow us on GitHub">
+                                        <i class="fab fa-github"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-12">
-                            <h4 class="font-bold mb-4">Follow Us</h4>
-                            <div class="flex space-x-4">
-                                <a href="#" class="bg-white text-indigo-600 hover:bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center transition duration-300 transform hover:scale-110 tooltip" data-tooltip="Twitter">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                                <a href="#" class="bg-white text-indigo-600 hover:bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center transition duration-300 transform hover:scale-110 tooltip" data-tooltip="LinkedIn">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                                <a href="#" class="bg-white text-indigo-600 hover:bg-gray-100 w-10 h-10 rounded-full flex items-center justify-center transition duration-300 transform hover:scale-110 tooltip" data-tooltip="GitHub">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
+                        <div class="md:w-1/2 p-8 md:p-12">
+                            <form id="contact-form" class="space-y-6" novalidate>
+                                <div class="form-group">
+                                    <input type="text" id="name" name="name" placeholder="Your Name" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-white" required aria-describedby="name-error">
+                                    <label for="name" class="block text-sm font-medium">Your Name</label>
+                                    <p id="name-error" class="text-red-500 text-sm mt-1 hidden error-message">Please enter your name.</p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" id="email" name="email" placeholder="Email Address" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-white" required aria-describedby="email-error">
+                                    <label for="email" class="block text-sm font-medium">Email Address</label>
+                                    <p id="email-error" class="text-red-500 text-sm mt-1 hidden error-message">Please enter a valid email address.</p>
+                                </div>
+                                <div class="form-group">
+                                    <select id="service" name="service" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-white" required aria-describedby="service-error">
+                                        <option value="" disabled selected>Select a service</option>
+                                        <option value="custom-development">Custom Development</option>
+                                        <option value="automation">Business Automation</option>
+                                        <option value="product-development">Product Development</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <p id="service-error" class="text-red-500 text-sm mt-1 hidden error-message">Please select a service.</p>
+                                </div>
+                                <div class="form-group">
+                                    <textarea id="message" name="message" rows="4" placeholder="Your Message" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-white" required aria-describedby="message-error"></textarea>
+                                    <label for="message" class="block text-sm font-medium">Your Message</label>
+                                    <p id="message-error" class="text-red-500 text-sm mt-1 hidden error-message">Please enter a message.</p>
+                                </div>
+                                <button type="submit" class="w-full gradient-bg text-white py-3 px-6 rounded-lg font-medium hover:opacity-90 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500">Send Message</button>
+                            </form>
                         </div>
-                    </div>
-                    <div class="md:w-1/2 p-8 md:p-12">
-                        <form id="contact-form" class="space-y-6">
-                            <div class="form-group">
-                                <input type="text" id="name" name="name" placeholder=" " class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-white" required>
-                                <label for="name" class="block text-sm font-medium">Your Name</label>
-                                <p class="text-red-500 text-sm mt-1 hidden error-message">Please enter your name.</p>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" id="email" name="email" placeholder=" " class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-white" required>
-                                <label for="email" class="block text-sm font-medium">Email Address</label>
-                                <p class="text-red-500 text-sm mt-1 hidden error-message">Please enter a valid email address.</p>
-                            </div>
-                            <div class="form-group">
-                                <select id="service" name="service" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-white">
-                                    <option value="">Select a service</option>
-                                    <option value="custom-development">Custom Development</option>
-                                    <option value="automation">Business Automation</option>
-                                    <option value="product-development">Product Development</option>
-                                    <option value="other">Other</option>
-                                </select>
-                                <p class="text-red-500 text-sm mt-1 hidden error-message">Please select a service.</p>
-                            </div>
-                            <div class="form-group">
-                                <textarea id="message" name="message" rows="4" placeholder=" " class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:text-white" required></textarea>
-                                <label for="message" class="block text-sm font-medium">Your Message</label>
-                                <p class="text-red-500 text-sm mt-1 hidden error-message">Please enter a message.</p>
-                            </div>
-                            <button type="submit" class="w-full gradient-bg text-white py-3 px-6 rounded-lg font-medium hover:opacity-90 transition duration-300 transform hover:scale-105">Send Message</button>
-                        </form>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
     <footer class="bg-gray-900 text-white py-12" data-aos="fade-up">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="md:flex md:justify-between">
@@ -602,9 +604,9 @@
                     <div>
                         <h4 class="text-sm font-semibold uppercase tracking-wider mb-4">Services</h4>
                         <ul class="space-y-2">
-                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Custom Development</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Business Automation</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Product Development</a></li>
+                            <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Custom Development</a></li>
+                            <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Business Automation</a></li>
+                            <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Product Development</a></li>
                         </ul>
                     </div>
                     <div>
@@ -618,8 +620,8 @@
                     <div>
                         <h4 class="text-sm font-semibold uppercase tracking-wider mb-4">Legal</h4>
                         <ul class="space-y-2">
-                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Privacy Policy</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Terms of Service</a></li>
+                            <li><a href="/privacy-policy" class="text-gray-400 hover:text-white transition duration-300">Privacy Policy</a></li>
+                            <li><a href="/terms-of-service" class="text-gray-400 hover:text-white transition duration-300">Terms of Service</a></li>
                         </ul>
                     </div>
                 </div>
@@ -627,23 +629,23 @@
             <div class="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
                 <p class="text-gray-400 text-sm">© 2025 Code 9. All rights reserved.</p>
                 <div class="mt-4 md:mt-0 flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300 transform hover:scale-110 tooltip" data-tooltip="Twitter">
+                    <a href="https://twitter.com/code9" class="text-gray-400 hover:text-white transition duration-300 transform hover:scale-110 tooltip" data-tooltip="Twitter" aria-label="Follow us on Twitter">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300 transform hover:scale-110 tooltip" data-tooltip="LinkedIn">
+                    <a href="https://linkedin.com/company/code9" class="text-gray-400 hover:text-white transition duration-300 transform hover:scale-110 tooltip" data-tooltip="LinkedIn" aria-label="Follow us on LinkedIn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300 transform hover:scale-110 tooltip" data-tooltip="GitHub">
+                    <a href="https://github.com/code9" class="text-gray-400 hover:text-white transition duration-300 transform hover:scale-110 tooltip" data-tooltip="GitHub" aria-label="Follow us on GitHub">
                         <i class="fab fa-github"></i>
                     </a>
                 </div>
             </div>
         </div>
     </footer>
-    <a href="#" id="back-to-top" class="hidden">
+    <a href="#" id="back-to-top" class="hidden focus:outline-none focus:ring-2 focus:ring-indigo-500" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </a>
-    <a href="#contact" class="fixed bottom-20 right-4 z-50 bg-indigo-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-105">
+    <a href="#contact" class="fixed bottom-20 right-4 z-50 bg-indigo-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500" aria-label="Contact us">
         Contact Us
     </a>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -651,17 +653,26 @@
         AOS.init({
             duration: 800,
             once: true,
+            disable: 'mobile', // Disable animations on mobile for performance
         });
+
+        // Preloader
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
             setTimeout(() => {
                 preloader.classList.add('hidden');
             }, 1000);
         });
-        document.getElementById('menu-toggle').addEventListener('click', () => {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuToggle.addEventListener('click', () => {
+            const isExpanded = mobileMenu.classList.toggle('hidden');
+            menuToggle.setAttribute('aria-expanded', !isExpanded);
         });
+
+        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -670,23 +681,36 @@
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     targetElement.scrollIntoView({ behavior: 'smooth' });
-                    document.getElementById('mobile-menu').classList.add('hidden');
+                    mobileMenu.classList.add('hidden');
+                    menuToggle.setAttribute('aria-expanded', 'false');
                 }
             });
         });
+
+        // Scroll progress and back-to-top
         const backToTop = document.getElementById('back-to-top');
         const scrollProgress = document.getElementById('scroll-progress');
+        let ticking = false;
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    if (window.scrollY > 300) {
+                        backToTop.classList.add('visible');
+                    } else {
+                        backToTop.classList.remove('visible');
+                    }
+                    const scrollTop = window.scrollY;
+                    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrollPercent = (scrollTop / docHeight) * 100;
+                    scrollProgress.style.width = scrollPercent + '%';
+                    scrollProgress.setAttribute('aria-valuenow', Math.round(scrollPercent));
+                    ticking = false;
+                });
+                ticking = true;
             }
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            scrollProgress.style.width = scrollPercent + '%';
         });
+
+        // Dark mode toggle
         const darkModeToggle = document.getElementById('dark-mode-toggle');
         const prefersDark = localStorage.getItem('dark-mode') === 'true';
         if (prefersDark) {
@@ -700,6 +724,8 @@
             icon.classList.toggle('fa-sun');
             localStorage.setItem('dark-mode', document.body.classList.contains('dark-mode'));
         });
+
+        // Contact form validation
         const contactForm = document.getElementById('contact-form');
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -710,14 +736,17 @@
                 if (!input.value.trim()) {
                     errorMessage.classList.remove('hidden');
                     input.classList.add('border-red-500');
+                    input.setAttribute('aria-invalid', 'true');
                     isValid = false;
                 } else {
                     errorMessage.classList.add('hidden');
                     input.classList.remove('border-red-500');
-                    if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
+                    input.setAttribute('aria-invalid', 'false');
+                    if (input.type === 'email' && !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(input.value)) {
                         errorMessage.textContent = 'Please enter a valid email address.';
                         errorMessage.classList.remove('hidden');
                         input.classList.add('border-red-500');
+                        input.setAttribute('aria-invalid', 'true');
                         isValid = false;
                     }
                 }
@@ -727,17 +756,40 @@
                 setTimeout(() => {
                     alert('Thank you for your message! We will get back to you soon.');
                     contactForm.reset();
+                    inputs.forEach(input => {
+                        const errorMessage = input.parentElement.querySelector('.error-message');
+                        errorMessage.classList.add('hidden');
+                        input.classList.remove('border-red-500');
+                        input.setAttribute('aria-invalid', 'false');
+                    });
                     contactForm.classList.remove('opacity-50', 'pointer-events-none');
                 }, 1000);
             }
         });
+
+        // Real-time input validation
         contactForm.querySelectorAll('input, textarea').forEach(input => {
             input.addEventListener('input', () => {
                 const errorMessage = input.parentElement.querySelector('.error-message');
                 if (input.value.trim()) {
                     errorMessage.classList.add('hidden');
                     input.classList.remove('border-red-500');
+                    input.setAttribute('aria-invalid', 'false');
+                    if (input.type === 'email' && !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(input.value)) {
+                        errorMessage.textContent = 'Please enter a valid email address.';
+                        errorMessage.classList.remove的主页
+                    }
                 }
+            });
+        });
+
+        // Keyboard accessibility for tooltips
+        document.querySelectorAll('.tooltip').forEach(tooltip => {
+            tooltip.addEventListener('focus', () => {
+                tooltip.classList.add('tooltip-active');
+            });
+            tooltip.addEventListener('blur', () => {
+                tooltip.classList.remove('tooltip-active');
             });
         });
     </script>
