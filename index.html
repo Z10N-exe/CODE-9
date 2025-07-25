@@ -1,75 +1,98 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" style="scroll-behavior: smooth;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code 9 | Software Development & Digital Solutions</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" integrity="sha384-..." crossorigin="anonymous">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous">
     <style>
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #FF8E53;
+            --text-dark: #1F2937;
+            --text-light: #D1D5DB;
+            --bg-light: #F5F5F5;
+            --bg-dark: #1F2937;
+            --border-light: #E5E7EB;
+            --border-dark: #4B5563;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background: #F5F5F5;
-            color: #1F2937;
+            background: var(--bg-light);
+            color: var(--text-dark);
             margin: 0;
             padding: 0;
             line-height: 1.6;
         }
+
         .gradient-bg {
-            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
         }
+
         .dark-mode {
-            background: #1F2937;
-            color: #D1D5DB;
+            background: var(--bg-dark);
+            color: var(--text-light);
         }
+
         .dark-mode .bg-white {
             background: #374151;
         }
+
         .dark-mode .text-gray-600 {
             color: #9CA3AF;
         }
+
         .dark-mode .gradient-bg {
             background: linear-gradient(135deg, #EF4444 0%, #F97316 100%);
         }
+
         .service-card {
             background: rgba(255, 255, 255, 0.98);
-            border: 1px solid #E5E7EB;
+            border: 1px solid var(--border-light);
             border-radius: 0.5rem;
             padding: 1rem;
             transition: transform 0.3s ease;
         }
+
         .dark-mode .service-card {
             background: rgba(31, 41, 55, 0.98);
-            border: 1px solid #4B5563;
+            border: 1px solid var(--border-dark);
         }
+
         .service-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
         .animate-float {
             animation: float 6s ease-in-out infinite;
         }
+
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
+
         #scroll-progress {
             position: fixed;
             top: 0;
             left: 0;
             height: 4px;
-            background: #FF6B6B;
+            background: var(--primary);
             width: 0;
             z-index: 1000;
             transition: width 0.3s ease;
         }
+
         #back-to-top {
             position: fixed;
             bottom: 1rem;
             right: 1rem;
-            background: #FF6B6B;
+            background: var(--primary);
             color: white;
             width: 2.5rem;
             height: 2.5rem;
@@ -80,60 +103,116 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
+
         #back-to-top.visible {
             opacity: 1;
         }
+
         #back-to-top:hover {
             transform: scale(1.1);
         }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-light);
+            border-radius: 0.5rem;
+            background: white;
+            transition: border-color 0.2s ease;
+        }
+
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
+            border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.3);
             outline: none;
         }
+
         .form-group label {
+            position: absolute;
+            top: 0.75rem;
+            left: 0.75rem;
             color: #6B7280;
             transition: all 0.2s ease;
+            pointer-events: none;
         }
+
         .form-group input:focus + label,
         .form-group input:not(:placeholder-shown) + label,
         .form-group textarea:focus + label,
-        .form-group textarea:not(:placeholder-shown) + label {
+        .form-group textarea:not(:placeholder-shown) + label,
+        .form-group select:focus + label,
+        .form-group select:not([value=""]) + label {
             top: -0.5rem;
             left: 0.5rem;
             font-size: 0.75rem;
-            color: #FF6B6B;
+            color: var(--primary);
+            background: white;
+            padding: 0 0.25rem;
         }
+
+        .dark-mode .form-group input,
+        .dark-mode .form-group select,
+        .dark-mode .form-group textarea {
+            background: #374151;
+            color: var(--text-light);
+            border-color: var(--border-dark);
+        }
+
         .dark-mode .form-group label {
             color: #9CA3AF;
         }
+
         .dark-mode .form-group input:focus + label,
         .dark-mode .form-group input:not(:placeholder-shown) + label,
         .dark-mode .form-group textarea:focus + label,
-        .dark-mode .form-group textarea:not(:placeholder-shown) + label {
+        .dark-mode .form-group textarea:not(:placeholder-shown) + label,
+        .dark-mode .form-group select:focus + label,
+        .dark-mode .form-group select:not([value=""]) + label {
             color: #F97316;
-        }
-        .gradient-border {
-            background: linear-gradient(to right, #FF6B6B, #FF8E53);
-            padding: 2px;
-            border-radius: 0.5rem;
-        }
-        .gradient-border > * {
-            background: #F5F5F5;
-            border-radius: 0.5rem;
-        }
-        .dark-mode .gradient-border > * {
             background: #374151;
         }
-        .gradient-border:hover > *,
-        .gradient-border:focus-within > * {
+
+        .gradient-border {
+            position: relative;
+            border-radius: 0.5rem;
+            padding: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            background: var(--bg-light);
+            border-radius: 0.5rem;
+        }
+
+        .dark-mode .gradient-border::before {
+            background: #374151;
+        }
+
+        .gradient-border:hover::before,
+        .gradient-border:focus-within::before {
             background: #FEF3F2;
         }
-        .dark-mode .gradient-border:hover > *,
-        .dark-mode .gradient-border:focus-within > * {
+
+        .dark-mode .gradient-border:hover::before,
+        .dark-mode .gradient-border:focus-within::before {
             background: #4B5563;
         }
+
         @media (min-width: 768px) {
             .container {
                 max-width: 1200px;
@@ -154,30 +233,30 @@
 <body class="bg-gray-50">
     <div id="scroll-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
     <div id="preloader" class="fixed inset-0 bg-white flex items-center justify-center z-50" aria-hidden="true">
-        <div class="loader border-4 border-gray-300 border-t-[#FF6B6B] rounded-full w-10 h-10 animate-spin"></div>
+        <div class="loader border-4 border-gray-300 border-t-[var(--primary)] rounded-full w-10 h-10 animate-spin"></div>
     </div>
     <nav class="bg-white shadow-md sticky top-0 z-40" data-aos="fade-down">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex-shrink-0">
-                    <span class="text-[#FF6B6B] font-bold text-2xl logo" aria-label="Code 9 Logo">CODE 9</span>
+                    <span class="text-[var(--primary)] font-bold text-2xl logo">CODE 9</span>
                 </div>
                 <div class="md:flex md:items-center md:space-x-6 hidden">
-                    <a href="#services" class="text-[#1F2937] hover:text-[#FF6B6B] px-3 py-2 text-sm font-medium">Services</a>
-                    <a href="#approach" class="text-[#1F2937] hover:text-[#FF6B6B] px-3 py-2 text-sm font-medium">Approach</a>
-                    <a href="#projects" class="text-[#1F2937] hover:text-[#FF6B6B] px-3 py-2 text-sm font-medium">Projects</a>
-                    <a href="#contact" class="text-[#1F2937] hover:text-[#FF6B6B] px-3 py-2 text-sm font-medium">Contact</a>
+                    <a href="#services" class="text-[var(--text-dark)] hover:text-[var(--primary)] px-3 py-2 text-sm font-medium">Services</a>
+                    <a href="#approach" class="text-[var(--text-dark)] hover:text-[var(--primary)] px-3 py-2 text-sm font-medium">Approach</a>
+                    <a href="#projects" class="text-[var(--text-dark)] hover:text-[var(--primary)] px-3 py-2 text-sm font-medium">Projects</a>
+                    <a href="#contact" class="text-[var(--text-dark)] hover:text-[var(--primary)] px-3 py-2 text-sm font-medium">Contact</a>
                 </div>
-                <button id="menu-toggle" class="md:hidden text-[#1F2937] hover:text-[#FF6B6B] focus:outline-none" aria-label="Toggle menu" aria-expanded="false">
+                <button id="menu-toggle" class="md:hidden text-[var(--text-dark)] hover:text-[var(--primary)] focus:outline-none" aria-label="Toggle menu" aria-expanded="false">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
             </div>
             <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
                 <div class="px-2 pt-2 pb-3 space-y-1">
-                    <a href="#services" class="block px-3 py-2 text-[#1F2937] hover:text-[#FF6B6B] text-sm font-medium">Services</a>
-                    <a href="#approach" class="block px-3 py-2 text-[#1F2937] hover:text-[#FF6B6B] text-sm font-medium">Approach</a>
-                    <a href="#projects" class="block px-3 py-2 text-[#1F2937] hover:text-[#FF6B6B] text-sm font-medium">Projects</a>
-                    <a href="#contact" class="block px-3 py-2 text-[#1F2937] hover:text-[#FF6B6B] text-sm font-medium">Contact</a>
+                    <a href="#services" class="block px-3 py-2 text-[var(--text-dark)] hover:text-[var(--primary)] text-sm font-medium">Services</a>
+                    <a href="#approach" class="block px-3 py-2 text-[var(--text-dark)] hover:text-[var(--primary)] text-sm font-medium">Approach</a>
+                    <a href="#projects" class="block px-3 py-2 text-[var(--text-dark)] hover:text-[var(--primary)] text-sm font-medium">Projects</a>
+                    <a href="#contact" class="block px-3 py-2 text-[var(--text-dark)] hover:text-[var(--primary)] text-sm font-medium">Contact</a>
                 </div>
             </div>
         </div>
@@ -193,7 +272,7 @@
                             <a href="#contact" class="block px-4 py-2 text-white font-medium">Get Started</a>
                         </div>
                         <div class="gradient-border">
-                            <a href="#services" class="block px-4 py-2 text-[#FF6B6B] bg-white font-medium">Our Services</a>
+                            <a href="#services" class="block px-4 py-2 text-[var(--primary)] bg-white font-medium">Our Services</a>
                         </div>
                     </div>
                 </div>
@@ -202,18 +281,18 @@
         <section id="services" class="py-12 sm:py-20 bg-white" data-aos="fade-up">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-8 sm:mb-12">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-[#1F2937] mb-2 relative">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-[var(--text-dark)] mb-2 relative">
                         Our Comprehensive Services
-                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-[#FF6B6B]"></span>
+                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-[var(--primary)]"></span>
                     </h2>
                     <p class="text-sm sm:text-xl text-gray-600 max-w-2xl mx-auto">From custom development to scalable products, we cover the full digital spectrum.</p>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                     <div class="service-card" data-aos="zoom-in">
-                        <div class="text-[#FF6B6B] mb-3">
+                        <div class="text-[var(--primary)] mb-3">
                             <i class="fas fa-laptop-code text-2xl sm:text-3xl"></i>
                         </div>
-                        <h3 class="text-lg sm:text-xl font-bold text-[#1F2937] mb-2">Custom Development</h3>
+                        <h3 class="text-lg sm:text-xl font-bold text-[var(--text-dark)] mb-2">Custom Development</h3>
                         <p class="text-sm sm:text-base text-gray-600 mb-3">Tailored apps and websites for your needs.</p>
                         <ul class="text-sm sm:text-base text-gray-600 space-y-2">
                             <li><i class="fas fa-check text-green-500 mr-2"></i>Personal portfolios</li>
@@ -222,10 +301,10 @@
                         </ul>
                     </div>
                     <div class="service-card" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="text-[#FF6B6B] mb-3">
+                        <div class="text-[var(--primary)] mb-3">
                             <i class="fas fa-robot text-2xl sm:text-3xl"></i>
                         </div>
-                        <h3 class="text-lg sm:text-xl font-bold text-[#1F2937] mb-2">Business Automation</h3>
+                        <h3 class="text-lg sm:text-xl font-bold text-[var(--text-dark)] mb-2">Business Automation</h3>
                         <p class="text-sm sm:text-base text-gray-600 mb-3">Streamline operations with intelligent systems.</p>
                         <ul class="text-sm sm:text-base text-gray-600 space-y-2">
                             <li><i class="fas fa-check text-green-500 mr-2"></i>Custom CRM</li>
@@ -234,10 +313,10 @@
                         </ul>
                     </div>
                     <div class="service-card" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="text-[#FF6B6B] mb-3">
+                        <div class="text-[var(--primary)] mb-3">
                             <i class="fas fa-boxes text-2xl sm:text-3xl"></i>
                         </div>
-                        <h3 class="text-lg sm:text-xl font-bold text-[#1F2937] mb-2">Product Development</h3>
+                        <h3 class="text-lg sm:text-xl font-bold text-[var(--text-dark)] mb-2">Product Development</h3>
                         <p class="text-sm sm:text-base text-gray-600 mb-3">Market-ready digital products that generate revenue.</p>
                         <ul class="text-sm sm:text-base text-gray-600 space-y-2">
                             <li><i class="fas fa-check text-green-500 mr-2"></i>SaaS platforms</li>
@@ -251,31 +330,31 @@
         <section id="approach" class="py-12 sm:py-20 bg-gray-50" data-aos="fade-up">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-8 sm:mb-12">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-[#1F2937] mb-2 relative">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-[var(--text-dark)] mb-2 relative">
                         Our Unique Approach
-                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-[#FF6B6B]"></span>
+                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-[var(--primary)]"></span>
                     </h2>
                     <p class="text-sm sm:text-xl text-gray-600 max-w-2xl mx-auto">Service excellence meets product innovation.</p>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
                     <div class="service-card" data-aos="fade-up">
                         <div class="flex items-center mb-3">
-                            <div class="bg-[#FF6B6B] text-white rounded-full w-6 h-6 flex items-center justify-center mr-2">1</div>
-                            <h3 class="text-lg sm:text-xl font-bold text-[#1F2937]">Service Excellence</h3>
+                            <div class="bg-[var(--primary)] text-white rounded-full w-6 h-6 flex items-center justify-center mr-2">1</div>
+                            <h3 class="text-lg sm:text-xl font-bold text-[var(--text-dark)]">Service Excellence</h3>
                         </div>
                         <p class="text-sm sm:text-base text-gray-600">Delivering top-notch development services.</p>
                     </div>
                     <div class="service-card" data-aos="fade-up" data-aos-delay="100">
                         <div class="flex items-center mb-3">
-                            <div class="bg-[#FF6B6B] text-white rounded-full w-6 h-6 flex items-center justify-center mr-2">2</div>
-                            <h3 class="text-lg sm:text-xl font-bold text-[#1F2937]">Product Innovation</h3>
+                            <div class="bg-[var(--primary)] text-white rounded-full w-6 h-6 flex items-center justify-center mr-2">2</div>
+                            <h3 class="text-lg sm:text-xl font-bold text-[var(--text-dark)]">Product Innovation</h3>
                         </div>
                         <p class="text-sm sm:text-base text-gray-600">Turning needs into scalable products.</p>
                     </div>
                     <div class="service-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="flex items-center mb-3">
-                            <div class="bg-[#FF6B6B] text-white rounded-full w-6 h-6 flex items-center justify-center mr-2">3</div>
-                            <h3 class="text-lg sm:text-xl font-bold text-[#1F2937]">Business Scaling</h3>
+                            <div class="bg-[var(--primary)] text-white rounded-full w-6 h-6 flex items-center justify-center mr-2">3</div>
+                            <h3 class="text-lg sm:text-xl font-bold text-[var(--text-dark)]">Business Scaling</h3>
                         </div>
                         <p class="text-sm sm:text-base text-gray-600">Scaling successful products into businesses.</p>
                     </div>
@@ -285,37 +364,37 @@
         <section id="projects" class="py-12 sm:py-20 bg-white" data-aos="fade-up">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-8 sm:mb-12">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-[#1F2937] mb-2 relative">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-[var(--text-dark)] mb-2 relative">
                         Featured Projects
-                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-[#FF6B6B]"></span>
+                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-[var(--primary)]"></span>
                     </h2>
                     <p class="text-sm sm:text-xl text-gray-600 max-w-2xl mx-auto">Showcasing our capabilities.</p>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div class="service-card" data-aos="fade-right">
                         <div class="flex items-center mb-3">
-                            <div class="bg-[#FF6B6B] text-white p-2 rounded-lg mr-2">
+                            <div class="bg-[var(--primary)] text-white p-2 rounded-lg mr-2">
                                 <i class="fas fa-brain text-lg"></i>
                             </div>
-                            <h3 class="text-lg sm:text-xl font-bold text-[#1F2937]">AI Dev Tool</h3>
+                            <h3 class="text-lg sm:text-xl font-bold text-[var(--text-dark)]">AI Dev Tool</h3>
                         </div>
                         <p class="text-sm sm:text-base text-gray-600 mb-2">AI-powered code assistant.</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="bg-[#FF6B6B] text-white px-2 py-1 rounded-full text-xs">AI</span>
-                            <span class="bg-[#FF6B6B] text-white px-2 py-1 rounded-full text-xs">Developer Tools</span>
+                            <span class="bg-[var(--primary)] text-white px-2 py-1 rounded-full text-xs">AI</span>
+                            <span class="bg-[var(--primary)] text-white px-2 py-1 rounded-full text-xs">Developer Tools</span>
                         </div>
                     </div>
                     <div class="service-card" data-aos="fade-left">
                         <div class="flex items-center mb-3">
-                            <div class="bg-[#FF6B6B] text-white p-2 rounded-lg mr-2">
+                            <div class="bg-[var(--primary)] text-white p-2 rounded-lg mr-2">
                                 <i class="fas fa-store text-lg"></i>
                             </div>
-                            <h3 class="text-lg sm:text-xl font-bold text-[#1F2937]">Digital Dropshipping</h3>
+                            <h3 class="text-lg sm:text-xl font-bold text-[var(--text-dark)]">Digital Dropshipping</h3>
                         </div>
                         <p class="text-sm sm:text-base text-gray-600 mb-2">Automated digital product resale.</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="bg-[#FF6B6B] text-white px-2 py-1 rounded-full text-xs">E-commerce</span>
-                            <span class="bg-[#FF6B6B] text-white px-2 py-1 rounded-full text-xs">Automation</span>
+                            <span class="bg-[var(--primary)] text-white px-2 py-1 rounded-full text-xs">E-commerce</span>
+                            <span class="bg-[var(--primary)] text-white px-2 py-1 rounded-full text-xs">Automation</span>
                         </div>
                     </div>
                 </div>
@@ -324,9 +403,9 @@
         <section id="contact" class="py-12 sm:py-20 bg-gray-50" data-aos="fade-up">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-8 sm:mb-12">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-[#1F2937] mb-2 relative">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-[var(--text-dark)] mb-2 relative">
                         Let's Build Something Amazing
-                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-[#FF6B6B]"></span>
+                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-[var(--primary)]"></span>
                     </h2>
                     <p class="text-sm sm:text-xl text-gray-600 max-w-2xl mx-auto">Discuss your project with us.</p>
                 </div>
@@ -354,17 +433,18 @@
                         <div class="p-4 sm:p-6">
                             <form id="contact-form" class="space-y-4" novalidate>
                                 <div class="form-group">
-                                    <input type="text" id="name" name="name" placeholder="Your Name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-[#FF6B6B] dark:bg-gray-800 dark:text-white" required aria-describedby="name-error">
                                     <label for="name">Your Name</label>
+                                    <input type="text" id="name" name="name" placeholder="Your Name" class="w-full" required aria-describedby="name-error">
                                     <p id="name-error" class="text-red-500 text-sm mt-1 hidden">Please enter your name.</p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" id="email" name="email" placeholder="Email Address" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-[#FF6B6B] dark:bg-gray-800 dark:text-white" required aria-describedby="email-error">
                                     <label for="email">Email Address</label>
+                                    <input type="email" id="email" name="email" placeholder="Email Address" class="w-full" required aria-describedby="email-error">
                                     <p id="email-error" class="text-red-500 text-sm mt-1 hidden">Please enter a valid email.</p>
                                 </div>
                                 <div class="form-group">
-                                    <select id="service" name="service" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-[#FF6B6B] dark:bg-gray-800 dark:text-white" required aria-describedby="service-error">
+                                    <label for="service">Select a Service</label>
+                                    <select id="service" name="service" class="w-full" required aria-describedby="service-error">
                                         <option value="" disabled selected>Select a service</option>
                                         <option value="custom-development">Custom Development</option>
                                         <option value="automation">Business Automation</option>
@@ -373,8 +453,8 @@
                                     <p id="service-error" class="text-red-500 text-sm mt-1 hidden">Please select a service.</p>
                                 </div>
                                 <div class="form-group">
-                                    <textarea id="message" name="message" rows="3" placeholder="Your Message" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-[#FF6B6B] dark:bg-gray-800 dark:text-white" required aria-describedby="message-error"></textarea>
                                     <label for="message">Your Message</label>
+                                    <textarea id="message" name="message" rows="3" placeholder="Your Message" class="w-full" required aria-describedby="message-error"></textarea>
                                     <p id="message-error" class="text-red-500 text-sm mt-1 hidden">Please enter a message.</p>
                                 </div>
                                 <button type="submit" class="w-full gradient-bg text-white py-2 px-4 rounded-lg hover:opacity-90">Send Message</button>
@@ -385,18 +465,18 @@
             </div>
         </section>
     </main>
-    <footer class="bg-[#1F2937] text-white py-6 sm:py-12" data-aos="fade-up">
+    <footer class="bg-[var(--text-dark)] text-white py-6 sm:py-12" data-aos="fade-up">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col sm:flex-row justify-between items-center">
                 <p class="text-sm mb-4 sm:mb-0">© 2025 Code 9. All rights reserved.</p>
                 <div class="flex space-x-4">
-                    <a href="https://twitter.com/code9" class="text-white hover:text-[#FF6B6B]" aria-label="Twitter">
+                    <a href="https://twitter.com/code9" class="text-white hover:text-[var(--primary)]" aria-label="Twitter">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="https://linkedin.com/company/code9" class="text-white hover:text-[#FF6B6B]" aria-label="LinkedIn">
+                    <a href="https://linkedin.com/company/code9" class="text-white hover:text-[var(--primary)]" aria-label="LinkedIn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
-                    <a href="https://github.com/code9" class="text-white hover:text-[#FF6B6B]" aria-label="GitHub">
+                    <a href="https://github.com/code9" class="text-white hover:text-[var(--primary)]" aria-label="GitHub">
                         <i class="fab fa-github"></i>
                     </a>
                 </div>
@@ -406,26 +486,30 @@
     <a href="#" id="back-to-top" class="hidden" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </a>
-    <button id="dark-mode-toggle" class="fixed top-4 right-4 bg-white text-[#1F2937] p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]" aria-label="Toggle dark mode">
+    <button id="dark-mode-toggle" class="fixed top-4 right-4 bg-white text-[var(--text-dark)] p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--primary)]" aria-label="Toggle dark mode">
         <i class="fas fa-moon"></i>
     </button>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" integrity="sha384-..." crossorigin="anonymous"></script>
     <script>
         AOS.init({ duration: 800, once: true });
 
         // Preloader
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
+            preloader.style.transition = 'opacity 0.3s';
             preloader.style.opacity = '0';
-            setTimeout(() => preloader.style.display = 'none', 500);
+            preloader.style.display = 'none';
         });
 
         // Mobile menu toggle
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
         menuToggle.addEventListener('click', () => {
-            const isExpanded = mobileMenu.classList.toggle('hidden');
-            menuToggle.setAttribute('aria-expanded', !isExpanded);
+            const isExpanded = !mobileMenu.classList.toggle('hidden');
+            menuToggle.setAttribute('aria-expanded', isExpanded);
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
         });
 
         // Smooth scroll
@@ -437,25 +521,39 @@
                     target.scrollIntoView({ behavior: 'smooth' });
                     mobileMenu.classList.add('hidden');
                     menuToggle.setAttribute('aria-expanded', 'false');
+                    menuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
                 }
             });
         });
 
+        // Debounce utility
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
         // Scroll progress and back-to-top
         const backToTop = document.getElementById('back-to-top');
         const scrollProgress = document.getElementById('scroll-progress');
-        window.addEventListener('scroll', () => {
+        const handleScroll = debounce(() => {
             const scrollTop = window.scrollY;
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
             const scrollPercent = (scrollTop / docHeight) * 100;
             scrollProgress.style.width = scrollPercent + '%';
-            if (scrollTop > 300) backToTop.classList.add('visible');
-            else backToTop.classList.remove('visible');
-        });
+            backToTop.classList.toggle('visible', scrollTop > 300);
+        }, 10);
+        window.addEventListener('scroll', handleScroll);
 
         // Dark mode toggle
         const darkModeToggle = document.getElementById('dark-mode-toggle');
-        const prefersDark = localStorage.getItem('dark-mode') === 'true';
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches || localStorage.getItem('dark-mode') === 'true';
         if (prefersDark) {
             document.body.classList.add('dark-mode');
             darkModeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
@@ -468,27 +566,52 @@
             localStorage.setItem('dark-mode', document.body.classList.contains('dark-mode'));
         });
 
-        // Contact form validation
+        // Contact form validation and submission
         const contactForm = document.getElementById('contact-form');
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             let isValid = true;
             const inputs = contactForm.querySelectorAll('input, select, textarea');
             inputs.forEach(input => {
-                const error = input.nextElementSibling.nextElementSibling;
+                const error = document.getElementById(`${input.id}-error`);
                 if (!input.value.trim()) {
                     error.classList.remove('hidden');
                     isValid = false;
+                    input.setAttribute('aria-invalid', 'true');
                 } else {
                     error.classList.add('hidden');
-                    if (input.type === 'email' && !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(input.value)) {
-                        error.textContent = 'Invalid email address.';
+                    input.setAttribute('aria-invalid', 'false');
+                    if (input.type === 'email' && !input.checkValidity()) {
+                        error.textContent = 'Please enter a valid email address.';
                         error.classList.remove('hidden');
+                        input.setAttribute('aria-invalid', 'true');
                         isValid = false;
                     }
                 }
             });
+
             if (isValid) {
+                // Example: Submit form data to a backend (uncomment and configure as needed)
+                /*
+                try {
+                    const formData = new FormData(contactForm);
+                    const response = await fetch('/api/contact', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-CSRF-Token': 'your-csrf-token' // Implement CSRF protection
+                        }
+                    });
+                    if (response.ok) {
+                        alert('Thank you! We’ll get back to you soon.');
+                        contactForm.reset();
+                    } else {
+                        alert('Submission failed. Please try again.');
+                    }
+                } catch (error) {
+                    alert('An error occurred. Please try again later.');
+                }
+                */
                 alert('Thank you! We’ll get back to you soon.');
                 contactForm.reset();
             }
