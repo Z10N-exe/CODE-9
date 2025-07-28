@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Sea by Code 9 | Developer Marketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0a1a2f;
+            color: #fff;
+            cursor: none;
+            overflow-x: hidden;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: scale(1.02);
+        }
+        
+        .rating-star {
+            color: #00f7ff;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00f7ff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+        }
+
+        .cursor::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: #00f7ff;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.5;
+        }
+
+        /* Wave Background */
+        .wave-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113.64,31.08,1200,41.05V0Z" fill="rgba(0,150,255,0.3)"/></svg>');
+            background-size: cover;
+            animation: wave 7s ease-in-out infinite;
+        }
+
+        .wave:nth-child(2) {
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113.64,31.08,1200,41.05V0Z" fill="rgba(0,100,200,0.2)"/></svg>');
+            animation: wave 10s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(-25%); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #fff;
+            color: #0a1a2f;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 20px;
+        }
+
+        .modal-content input,
+        .modal-content textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .modal-content button {
+            background: #00f7ff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #0a1a2f;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .modal-content button:hover {
+            background: #00b7ff;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Listing Card */
+        .listing-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s;
+        }
+
+        .listing-card:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="wave-container">
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="text-2xl font-bold text-blue-700">Open Sea by Code 9</span>
+                    </div>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+                    <a href="#services" class="text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Services</a>
+                    <a href="#marketplace" class="text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Marketplace</a>
+                    <a href="#testimonials" class="text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Testimonials</a>
+                    <a href="#hire" class="text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Hire Us</a>
+                    <a href="#developers" class="text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">For Developers</a>
+                </div>
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-orange-500 focus:outline-none" aria-controls="mobile-menu" aria-expanded="false" id="mobile-menu-button">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="hidden md:hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white">
+                <a href="#services" class="text-gray-700 hover:text-orange-500 block px-3 py-2 text-base font-medium">Services</a>
+                <a href="#marketplace" class="text-gray-700 hover:text-orange-500 block px-3 py-2 text-base font-medium">Marketplace</a>
+                <a href="#testimonials" class="text-gray-700 hover:text-orange-500 block px-3 py-2 text-base font-medium">Testimonials</a>
+                <a href="#hire" class="text-gray-700 hover:text-orange-500 block px-3 py-2 text-base font-medium">Hire Us</a>
+                <a href="#developers" class="text-gray-700 hover:text-orange-500 block px-3 py-2 text-base font-medium">For Developers</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-white">
+                    Welcome to <span class="text-orange-500">Open Sea by Code 9</span>
+                </h1>
+                <p class="mt-6 max-w-2xl mx-auto text-xl text-gray-200">
+                    A P2P marketplace for developers to sell websites and products. Connect directly with clients, showcase your creations, and secure transactions with admin approval.
+                </p>
+                <div class="mt-10">
+                    <a href="#marketplace" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-orange-500 hover:bg-orange-600">
+                        Explore Marketplace
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Section (Unchanged) -->
+    <div id="services" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold text-blue-800 sm:text-4xl">
+                    Our Services
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
+                    Explore how we can transform your ideas into reality.
+                </p>
+            </div>
+            <div class="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div class="service-card bg-blue-50 rounded-lg overflow-hidden shadow-md p-6 transition duration-300">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-700">
+                        <i class="fas fa-code text-xl"></i>
+                    </div>
+                    <h3 class="mt-4 text-lg font-medium text-blue-800">Custom Software Development</h3>
+                    <p class="mt-2 text-base text-gray-600">
+                        Tailored solutions built to your exact specifications.
+                    </p>
+                </div>
+                <div class="service-card bg-orange-50 rounded-lg overflow-hidden shadow-md p-6 transition duration-300">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-orange-100 text-orange-700">
+                        <i class="fas fa-mobile-alt text-xl"></i>
+                    </div>
+                    <h3 class="mt-4 text-lg font-medium text-blue-800">Web & Mobile Applications</h3>
+                    <p class="mt-2 text-base text-gray-600">
+                        Engaging and intuitive experiences across all devices.
+                    </p>
+                </div>
+                <div class="service-card bg-blue-50 rounded-lg overflow-hidden shadow-md p-6 transition duration-300">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-700">
+                        <i class="fas fa-cloud text-xl"></i>
+                    </div>
+                    <h3 class="mt-4 text-lg font-medium text-blue-800">Cloud Solutions</h3>
+                    <p class="mt-2 text-base text-gray-600">
+                        Scalable and secure cloud-based architectures.
+                    </p>
+                </div>
+                <div class="service-card bg-orange-50 rounded-lg overflow-hidden shadow-md p-6 transition duration-300">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-orange-100 text-orange-700">
+                        <i class="fas fa-brain text-xl"></i>
+                    </div>
+                    <h3 class="mt-4 text-lg font-medium text-blue-800">Data Analytics & AI</h3>
+                    <p class="mt-2 text-base text-gray-600">
+                        Unlock insights and drive innovation with intelligent solutions.
+                    </p>
+                </div>
+                <div class="service-card bg-blue-50 rounded-lg overflow-hidden shadow-md p-6 transition duration-300">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-700">
+                        <i class="fas fa-paint-brush text-xl"></i>
+                    </div>
+                    <h3 class="mt-4 text-lg font-medium text-blue-800">UI/UX Design</h3>
+                    <p class="mt-2 text-base text-gray-600">
+                        User-centric designs that prioritize usability and aesthetics.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Marketplace Section -->
+    <div id="marketplace" class="py-16 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                    Developer Marketplace
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-300 mx-auto">
+                    Browse ready-made websites and products built by our talented developer community.
+                </p>
+            </div>
+            <div class="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div class="listing-card">
+                    <h3 class="text-lg font-medium text-orange-500">E-Commerce Platform</h3>
+                    <p class="mt-2 text-gray-300">Fully functional online store with payment integration.</p>
+                    <p class="mt-2 text-gray-400">Price: $5,000</p>
+                    <p class="mt-2 text-gray-400">Developer: John Doe</p>
+                    <button onclick="openModal('E-Commerce Platform')" class="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-blue-900 bg-orange-500 hover:bg-orange-600">
+                        Contact Admin
+                    </button>
+                </div>
+                <div class="listing-card">
+                    <h3 class="text-lg font-medium text-orange-500">Portfolio Template</h3>
+                    <p class="mt-2 text-gray-300">Customizable portfolio for freelancers.</p>
+                    <p class="mt-2 text-gray-400">Price: $1,200</p>
+                    <p class="mt-2 text-gray-400">Developer: Jane Smith</p>
+                    <button onclick="openModal('Portfolio Template')" class="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-blue-900 bg-orange-500 hover:bg-orange-600">
+                        Contact Admin
+                    </button>
+                </div>
+                <div class="listing-card">
+                    <h3 class="text-lg font-medium text-orange-500">Blog Platform</h3>
+                    <p class="mt-2 text-gray-300">SEO-optimized blogging solution with CMS.</p>
+                    <p class="mt-2 text-gray-400">Price: $2,500</p>
+                    <p class="mt-2 text-gray-400">Developer: Alex Brown</p>
+                    <button onclick="openModal('Blog Platform')" class="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-blue-900 bg-orange-500 hover:bg-orange-600">
+                        Contact Admin
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Section (Modified Colors) -->
+    <div id="testimonials" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold text-blue-800 sm:text-4xl">
+                    What Our Clients Say
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
+                    Hear directly from businesses who have experienced the Code 9 difference.
+                </p>
+            </div>
+            <div class="mt-16 grid gap-8 md:grid-cols-2">
+                <div class="testimonial-card bg-blue-50 rounded-lg p-8 shadow-md">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <div class="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-700">
+                                <i class="fas fa-user text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-blue-800">Sarah L.</h4>
+                            <p class="text-gray-600">CEO of InnovateTech</p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-700 italic">
+                            "Code 9 transformed our online presence. Their team was incredibly professional and delivered a solution that exceeded our expectations."
+                        </p>
+                    </div>
+                    <div class="mt-4 flex">
+                        <div class="rating-star">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card bg-orange-50 rounded-lg p-8 shadow-md">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <div class="h-12 w-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-700">
+                                <i class="fas fa-user text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-blue-800">Mark D.</h4>
+                            <p class="text-gray-600">Operations Manager at Global Logistics</p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-700 italic">
+                            "The maintenance service from Code 9 has been invaluable. We no longer worry about system downtime and can focus on our core business."
+                        </p>
+                    </div>
+                    <div class="mt-4 flex">
+                        <div class="rating-star">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-16 bg-gray-50 rounded-lg p-8 shadow-inner">
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold text-blue-800">Our Average Rating</h3>
+                    <div class="mt-4 flex justify-center">
+                        <div class="rating-star text-3xl">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="mt-2 text-gray-600">4.7 out of 5 based on 128 reviews</p>
+                    <div class="mt-6 w-full bg-gray-200 rounded-full h-4">
+                        <div class="bg-orange-500 h-4 rounded-full" style="width: 95%"></div>
+                    </div>
+                    <p class="mt-1 text-sm text-gray-600">95% of customers recommend us</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hire Team Section (Unchanged) -->
+    <div id="hire" class="py-16 gradient-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-3xl font-extrabold text-blue-800 sm:text-4xl">
+                    Hire Our Team
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-600 lg:mx-auto">
+                    Ready to bring your next big idea to life? Our dedicated team of developers, designers, and project managers is available to work on your next project.
+                </p>
+            </div>
+            <div class="mt-12">
+                <div class="bg-white rounded-lg shadow-xl overflow-hidden">
+                    <div class="grid md:grid-cols-2">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-blue-800">Flexible Engagement Models</h3>
+                            <p class="mt-4 text-gray-600">
+                                We offer various engagement models to suit your specific requirements:
+                            </p>
+                            <ul class="mt-6 space-y-4">
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-check-circle text-green-500"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600"><span class="font-medium">Project-based</span> - Fixed scope and price</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-check-circle text-green-500"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600"><span class="font-medium">Dedicated team</span> - Exclusive resources for your project</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-check-circle text-green-500"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600"><span class="font-medium">Staff augmentation</span> - Supplement your existing team</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-blue-50 p-8 flex items-center justify-center">
+                            <div class="text-center">
+                                <h3 class="text-xl font-bold text-blue-800">Get a Free Consultation</h3>
+                                <p class="mt-2 text-gray-600">
+                                    Let's discuss your project requirements and find the best solution for your needs.
+                                </p>
+                                <div class="mt-6">
+                                    <a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-orange-500 hover:bg-orange-600">
+                                        Contact Us Now
+                                        <i class="fas fa-arrow-right ml-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Developers Section (Modified for Marketplace) -->
+    <div id="developers" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-3xl font-extrabold text-blue-800 sm:text-4xl">
+                    Developers: Sell Your Creations
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-600 lg:mx-auto">
+                    Join our marketplace to sell your websites and products directly to clients, with secure transactions managed by our team.
+                </p>
+            </div>
+            <div class="mt-12">
+                <div class="bg-gradient-to-r from-blue-50 to-orange-50 rounded-lg shadow-lg overflow-hidden">
+                    <div class="grid md:grid-cols-2">
+                        <div class="p-8 md:p-12">
+                            <h3 class="text-2xl font-bold text-blue-800">Join Open Sea by Code 9</h3>
+                            <p class="mt-4 text-gray-600">
+                                Showcase your ready-made websites and products to a global audience. Set your prices, connect with buyers, and let our admins handle secure transactions.
+                            </p>
+                            <ul class="mt-6 space-y-4">
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-check text-green-500"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600">List your projects for free</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-check text-green-500"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600">Set your own prices and terms</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-check text-green-500"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600">Secure transactions with admin approval</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-check text-green-500"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600">Access to a community of buyers</p>
+                                </li>
+                            </ul>
+                            <div class="mt-8">
+                                <a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-700 hover:bg-blue-800">
+                                    Join Now
+                                    <i class="fas fa-user-plus ml-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="hidden md:block bg-blue-50">
+                            <div class="h-full flex items-center justify-center p-8">
+                                <div class="relative w-full h-full">
+                                    <div class="absolute top-0 left-0 w-32 h-32 bg-orange-100 rounded-lg transform rotate-6"></div>
+                                    <div class="absolute top-1/2 left-1/2 w-32 h-32 bg-blue-100 rounded-lg transform -rotate-12 -translate-x-1/2 -translate-y-1/2"></div>
+                                    <div class="absolute bottom-0 right-0 w-32 h-32 bg-orange-200 rounded-lg transform rotate-3"></div>
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <i class="fas fa-laptop-code text-6xl text-blue-700 opacity-30"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Admin Contact -->
+    <div class="modal" id="adminModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Contact Admin for Transaction</h2>
+            <form id="adminForm">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <input type="text" id="listingName" placeholder="Listing Name" readonly>
+                <textarea placeholder="Details of the transaction" required></textarea>
+                <button type="submit">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer (Modified Colors) -->
+    <footer class="bg-blue-900 text-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-medium mb-4">Open Sea by Code 9</h3>
+                    <p class="text-blue-200">
+                        A marketplace for developers to sell websites and products.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-medium mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-blue-200 hover:text-white">Custom Development</a></li>
+                        <li><a href="#" class="text-blue-200 hover:text-white">Web & Mobile Apps</a></li>
+                        <li><a href="#" class="text-blue-200 hover:text-white">Cloud Solutions</a></li>
+                        <li><a href="#" class="text-blue-200 hover:text-white">Data Analytics</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-medium mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#about.html" class="text-blue-200 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="text-blue-200 hover:text-white">Careers</a></li>
+                        <li><a href="#" class="text-blue-200 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-blue-200 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-medium mb-4">Connect</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-blue-200 hover:text-white">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-blue-200 hover:text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-blue-200 hover:text-white">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-blue-200 hover:text-white">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-blue-200">hello@code9.com</p>
+                        <p class="text-blue-200">+1 (555) 123-4567</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-blue-700">
+                <p class="text-center text-blue-200">
+                    &copy; 2025 Open Sea by Code 9. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+        });
+
+        // Modal Functionality
+        const modal = document.getElementById('adminModal');
+        const form = document.getElementById('adminForm');
+        const listingNameInput = document.getElementById('listingName');
+
+        function openModal(listingName) {
+            listingNameInput.value = listingName;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Request sent to admin! You will be contacted soon.');
+            closeModal();
+            form.reset();
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

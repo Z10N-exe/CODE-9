@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8fafc;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.gradient-bg {
+    background: linear-gradient(135deg, #e6f0ff 0%, #fdf2e6 100%);
+}
+
+/* Service and Testimonial Cards */
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-card {
+    transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: scale(1.02);
+}
+
+/* Rating Stars */
+.rating-star {
+    color: #fbbf24;
+}
+
+/* Form Elements */
+input,
+textarea {
+    transition: all 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+    border-color: #f97316;
+}
+
+/* Streak Calendar */
+.streak-calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+.streak-day {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+}
+
+.streak-day:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Navigation */
+nav a {
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #f97316 !important;
+}
+
+/* Buttons */
+button,
+a.bg-orange-500,
+a.bg-blue-700 {
+    transition: all 0.3s ease;
+}
+
+button:hover,
+a.bg-orange-500:hover,
+a.bg-blue-700:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Dashboard Specific */
+#streakCalendar .bg-green-100 { background-color: #d1fae5; }
+#streakCalendar .bg-green-200 { background-color: #a7f3d0; }
+#streakCalendar .bg-green-300 { background-color: #6ee7b7; }
+#streakCalendar .bg-green-400 { background-color: #34d399; }
+
+#jobRequestsList li {
+    padding: 8px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+#jobRequestsList li:last-child {
+    border-bottom: none;
+}
+
+/* Careers and Blog Cards */
+.job-card,
+.blog-card {
+    transition: all 0.3s ease;
+}
+
+.job-card:hover,
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 640px) {
+    .streak-calendar {
+        gap: 2px;
+    }
+
+    .streak-day {
+        width: 12px;
+        height: 12px;
+    }
+
+    .max-w-7xl {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    h2 {
+        font-size: 1.875rem;
+    }
+
+    p {
+        font-size: 0.875rem;
+    }
+}
+
+/* Accessibility */
+:focus {
+    outline: 2px solid #f97316;
+    outline-offset: 2px;
+}
+
+/* Animation for Loading States */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.loading {
+    animation: pulse 1.5s infinite;
+}

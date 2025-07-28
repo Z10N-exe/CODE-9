@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Email | Code 9</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="font-poppins bg-gray-100">
+    <div class="min-h-screen flex items-center justify-center gradient-bg">
+        <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full text-center">
+            <h2 class="text-3xl font-extrabold text-blue-800">Verifying Your Email</h2>
+            <p class="mt-4 text-gray-600">Please wait while we verify your email address...</p>
+            <p class="mt-2 text-gray-600">You will be redirected to the dashboard upon successful verification.</p>
+        </div>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+        fetch(`/api/auth/verify?token=${token}`)
+            .then((res) => {
+                if (!res.ok) throw new Error('Verification failed');
+                window.location.href = 'dashboard.html';
+            })
+            .catch((err) => {
+                document.querySelector('p').textContent = 'Verification failed. Please try again or contact support.';
+            });
+    </script>
+</body>
+</html>
