@@ -1,637 +1,628 @@
 <!DOCTYPE html>
-<html lang="en" style="scroll-behavior: smooth;">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code 9 | Software Development & Digital Solutions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" integrity="sha384-cM1gB+FtklX+8dVbas5A4kD0Y5F5F6vT2uT7fO5oB+5o5V5F5F6vT2uT7fO5oB+" crossorigin="anonymous">
+    <title>Code 9 | Cutting-Edge Software Solutions</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #6B7280; /* Faded blue */
-            --secondary: #D97706; /* Dull orange */
-            --text-dark: #1F2937;
-            --text-light: #D1D5DB;
-            --bg-light: #FFFDD0; /* Light cream */
-            --bg-dark: #1F2937;
-            --border-light: #E5E7EB;
-            --border-dark: #4B5563;
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg-light);
-            color: var(--text-dark);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
         }
-
+        
         .gradient-bg {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, #e6f0ff 0%, #fdf2e6 100%);
         }
-
-        .dark-mode {
-            background: var(--bg-dark);
-            color: var(--text-light);
-        }
-
-        .dark-mode .bg-white {
-            background: #374151;
-        }
-
-        .dark-mode .text-gray-600 {
-            color: #9CA3AF;
-        }
-
-        .dark-mode .gradient-bg {
-            background: linear-gradient(135deg, #4B5563 0%, #B45309 100%);
-        }
-
-        .service-card {
-            background: rgba(255, 255, 255, 0.98);
-            border: 1px solid var(--border-light);
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .dark-mode .service-card {
-            background: rgba(31, 41, 55, 0.98);
-            border: 1px solid var(--border-dark);
-        }
-
+        
         .service-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
-
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
+        
+        .testimonial-card {
+            transition: all 0.3s ease;
         }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        
+        .testimonial-card:hover {
+            transform: scale(1.02);
         }
-
-        #scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 4px;
-            background: var(--primary);
-            width: 0;
-            z-index: 1000;
-            transition: width 0.3s ease;
-        }
-
-        #preloader {
-            background: var(--bg-light);
-        }
-
-        .dark-mode #preloader {
-            background: var(--bg-dark);
-        }
-
-        .dark-mode .loader {
-            border: 4px solid #4B5563;
-            border-top: 4px solid #B45309;
-        }
-
-        #back-to-top {
-            position: fixed;
-            bottom: 1rem;
-            right: 1rem;
-            background: var(--primary);
-            color: white;
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        #back-to-top.visible {
-            opacity: 1;
-        }
-
-        #back-to-top:hover {
-            transform: scale(1.1);
-        }
-
-        .form-group {
-            position: relative;
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border-light);
-            border-radius: 0.5rem;
-            background: white;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.3);
-            outline: none;
-        }
-
-        .form-group label {
-            position: absolute;
-            top: 0.75rem;
-            left: 0.75rem;
-            color: #6B7280;
-            transition: all 0.2s ease;
-            pointer-events: none;
-        }
-
-        .form-group input:focus + label,
-        .form-group input:not(:placeholder-shown) + label,
-        .form-group textarea:focus + label,
-        .form-group textarea:not(:placeholder-shown) + label,
-        .form-group select:focus + label,
-        .form-group select:not([value=""]) + label {
-            top: -0.5rem;
-            left: 0.5rem;
-            font-size: 0.75rem;
-            color: var(--primary);
-            background: white;
-            padding: 0 0.25rem;
-        }
-
-        .dark-mode .form-group input,
-        .dark-mode .form-group select,
-        .dark-mode .form-group textarea {
-            background: #374151;
-            color: var(--text-light);
-            border-color: var(--border-dark);
-        }
-
-        .dark-mode .form-group label {
-            color: #9CA3AF;
-        }
-
-        .dark-mode .form-group input:focus + label,
-        .dark-mode .form-group input:not(:placeholder-shown) + label,
-        .dark-mode .form-group textarea:focus + label,
-        .dark-mode .form-group textarea:not(:placeholder-shown) + label,
-        .dark-mode .form-group select:focus + label,
-        .dark-mode .form-group select:not([value=""]) + label {
-            color: #B45309;
-            background: #374151;
-        }
-
-        .gradient-border {
-            position: relative;
-            border-radius: 0.5rem;
-            padding: 2px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-        }
-
-        .gradient-border::before {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            right: 2px;
-            bottom: 2px;
-            background: var(--bg-light);
-            border-radius: 0.5rem;
-        }
-
-        .dark-mode .gradient-border::before {
-            background: #374151;
-        }
-
-        .gradient-border:hover::before,
-        .gradient-border:focus-within::before {
-            background: #FEF3F2;
-        }
-
-        .dark-mode .gradient-border:hover::before,
-        .dark-mode .gradient-border:focus-within::before {
-            background: #4B5563;
-        }
-
-        @media (min-width: 768px) {
-            .container {
-                max-width: 1200px;
-                padding: 2rem;
-            }
-            .md\:flex {
-                display: flex;
-            }
-            .md\:w-1/2 {
-                width: 50%;
-            }
+        
+        .rating-star {
+            color: #fbbf24;
         }
     </style>
 </head>
-<body class="bg-[var(--bg-light)]">
-    <div id="scroll-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-    <div id="preloader" class="fixed inset-0 bg-[var(--bg-light)] flex items-center justify-center z-50" role="status" aria-label="Loading page">
-        <div class="loader border-4 border-gray-300 border-t-[var(--primary)] rounded-full w-10 h-10 animate-spin"></div>
-    </div>
-    <nav class="bg-white shadow-md sticky top-0 z-40" data-aos="fade-down">
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex-shrink-0">
-                    <span class="text-[var(--primary)] font-bold text-2xl logo">CODE 9</span>
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="text-2xl font-bold text-blue-700">Code 9</span>
+                    </div>
                 </div>
-                <div class="md:flex md:items-center md:space-x-6 hidden">
-                    <a href="#services" class="text-[var(--text-dark)] hover:text-[var(--primary)] px-3 py-2 text-sm font-medium">Services</a>
-                    <a href="#approach" class="text-[var(--text-dark)] hover:text-[var(--primary)] px-3 py-2 text-sm font-medium">Approach</a>
-                    <a href="#projects" class="text-[var(--text-dark)] hover:text-[var(--primary)] px-3 py-2 text-sm font-medium">Projects</a>
-                    <a href="#contact" class="text-[var(--text-dark)] hover:text-[var(--primary)] px-3 py-2 text-sm font-medium">Contact</a>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+                    <a href="#services" class="text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Services</a>
+                    <a href="#maintenance" class="text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Maintenance</a>
+                    <a href="#testimonials" class="text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Testimonials</a>
+                    <a href="#hire" class="text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">Hire Us</a>
+                    <a href="#developers" class="text-gray-700 hover:text-orange-500 px-3 py-2 text-sm font-medium">For Developers</a>
                 </div>
-                <button id="menu-toggle" class="md:hidden text-[var(--text-dark)] hover:text-[var(--primary)] focus:outline-none" aria-label="Toggle menu" aria-expanded="false">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-orange-500 focus:outline-none" aria-controls="mobile-menu" aria-expanded="false" id="mobile-menu-button">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
             </div>
-            <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
-                <div class="px-2 pt-2 pb-3 space-y-1">
-                    <a href="#services" class="block px-3 py-2 text-[var(--text-dark)] hover:text-[var(--primary)] text-sm font-medium">Services</a>
-                    <a href="#approach" class="block px-3 py-2 text-[var(--text-dark)] hover:text-[var(--primary)] text-sm font-medium">Approach</a>
-                    <a href="#projects" class="block px-3 py-2 text-[var(--text-dark)] hover:text-[var(--primary)] text-sm font-medium">Projects</a>
-                    <a href="#contact" class="block px-3 py-2 text-[var(--text-dark)] hover:text-[var(--primary)] text-sm font-medium">Contact</a>
-                </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div class="hidden md:hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white">
+                <a href="#services" class="text-gray-700 hover:text-orange-500 block px-3 py-2 text-base font-medium">Services</a>
+                <a href="#maintenance" class="text-gray-700 hover:text-orange-500 block px-3 py-2 text-base font-medium">Maintenance</a>
+                <a href="#testimonials" class="text-gray-700 hover:text-orange-500 block px-3 py-2 text-base font-medium">Testimonials</a>
+                <a href="#hire" class="text-gray-700 hover:text-orange-500 block px-3 py-2 text-base font-medium">Hire Us</a>
+                <a href="#developers" class="text-gray-700 hover:text-orange-500 block px-3 py-2 text-base font-medium">For Developers</a>
             </div>
         </div>
     </nav>
-    <main>
-        <section class="gradient-bg text-white py-12 sm:py-20" data-aos="fade-up">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center">
-                    <h1 class="text-2xl sm:text-4xl font-bold mb-4">Building Digital Solutions That Scale</h1>
-                    <p class="text-sm sm:text-xl mb-6 opacity-90">We combine service excellence with product innovation to create sustainable digital value.</p>
-                    <div class="flex flex-col sm:flex-row justify-center gap-4">
-                        <div class="gradient-border">
-                            <a href="#contact" class="block px-4 py-2 text-white font-medium">Get Started</a>
-                        </div>
-                        <div class="gradient-border">
-                            <a href="#services" class="block px-4 py-2 text-[var(--primary)] bg-white font-medium">Our Services</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="services" class="py-12 sm:py-20 bg-white" data-aos="fade-up">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-8 sm:mb-12">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-[var(--text-dark)] mb-2 relative">
-                        Our Comprehensive Services
-                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-[var(--primary)]"></span>
-                    </h2>
-                    <p class="text-sm sm:text-xl text-gray-600 max-w-2xl mx-auto">From custom development to scalable products, we cover the full digital spectrum.</p>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                    <div class="service-card" data-aos="zoom-in">
-                        <div class="text-[var(--primary)] mb-3">
-                            <i class="fas fa-laptop-code text-2xl sm:text-3xl"></i>
-                        </div>
-                        <h3 class="text-lg sm:text-xl font-bold text-[var(--text-dark)] mb-2">Custom Development</h3>
-                        <p class="text-sm sm:text-base text-gray-600 mb-3">Tailored apps and websites for your needs.</p>
-                        <ul class="text-sm sm:text-base text-gray-600 space-y-2">
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Personal portfolios</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Business websites</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>E-commerce solutions</li>
-                        </ul>
-                    </div>
-                    <div class="service-card" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="text-[var(--primary)] mb-3">
-                            <i class="fas fa-robot text-2xl sm:text-3xl"></i>
-                        </div>
-                        <h3 class="text-lg sm:text-xl font-bold text-[var(--text-dark)] mb-2">Business Automation</h3>
-                        <p class="text-sm sm:text-base text-gray-600 mb-3">Streamline operations with intelligent systems.</p>
-                        <ul class="text-sm sm:text-base text-gray-600 space-y-2">
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Custom CRM</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Workflow automation</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>AI agents</li>
-                        </ul>
-                    </div>
-                    <div class="service-card" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="text-[var(--primary)] mb-3">
-                            <i class="fas fa-boxes text-2xl sm:text-3xl"></i>
-                        </div>
-                        <h3 class="text-lg sm:text-xl font-bold text-[var(--text-dark)] mb-2">Product Development</h3>
-                        <p class="text-sm sm:text-base text-gray-600 mb-3">Market-ready digital products that generate revenue.</p>
-                        <ul class="text-sm sm:text-base text-gray-600 space-y-2">
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>SaaS platforms</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>API services</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Digital tools</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="approach" class="py-12 sm:py-20 bg-[var(--bg-light)]" data-aos="fade-up">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-8 sm:mb-12">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-[var(--text-dark)] mb-2 relative">
-                        Our Unique Approach
-                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-[var(--primary)]"></span>
-                    </h2>
-                    <p class="text-sm sm:text-xl text-gray-600 max-w-2xl mx-auto">Service excellence meets product innovation.</p>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-                    <div class="service-card" data-aos="fade-up">
-                        <div class="flex items-center mb-3">
-                            <div class="bg-[var(--primary)] text-white rounded-full w-6 h-6 flex items-center justify-center mr-2">1</div>
-                            <h3 class="text-lg sm:text-xl font-bold text-[var(--text-dark)]">Service Excellence</h3>
-                        </div>
-                        <p class="text-sm sm:text-base text-gray-600">Delivering top-notch development services.</p>
-                    </div>
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="flex items-center mb-3">
-                            <div class="bg-[var(--primary)] text-white rounded-full w-6 h-6 flex items-center justify-center mr-2">2</div>
-                            <h3 class="text-lg sm:text-xl font-bold text-[var(--text-dark)]">Product Innovation</h3>
-                        </div>
-                        <p class="text-sm sm:text-base text-gray-600">Turning needs into scalable products.</p>
-                    </div>
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="flex items-center mb-3">
-                            <div class="bg-[var(--primary)] text-white rounded-full w-6 h-6 flex items-center justify-center mr-2">3</div>
-                            <h3 class="text-lg sm:text-xl font-bold text-[var(--text-dark)]">Business Scaling</h3>
-                        </div>
-                        <p class="text-sm sm:text-base text-gray-600">Scaling successful products into businesses.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="projects" class="py-12 sm:py-20 bg-white" data-aos="fade-up">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-8 sm:mb-12">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-[var(--text-dark)] mb-2 relative">
-                        Featured Projects
-                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-[var(--primary)]"></span>
-                    </h2>
-                    <p class="text-sm sm:text-xl text-gray-600 max-w-2xl mx-auto">Showcasing our capabilities.</p>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                    <div class="service-card" data-aos="fade-right">
-                        <div class="flex items-center mb-3">
-                            <div class="bg-[var(--primary)] text-white p-2 rounded-lg mr-2">
-                                <i class="fas fa-brain text-lg"></i>
-                            </div>
-                            <h3 class="text-lg sm:text-xl font-bold text-[var(--text-dark)]">AI Dev Tool</h3>
-                        </div>
-                        <p class="text-sm sm:text-base text-gray-600 mb-2">AI-powered code assistant.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-[var(--primary)] text-white px-2 py-1 rounded-full text-xs">AI</span>
-                            <span class="bg-[var(--primary)] text-white px-2 py-1 rounded-full text-xs">Developer Tools</span>
-                        </div>
-                    </div>
-                    <div class="service-card" data-aos="fade-left">
-                        <div class="flex items-center mb-3">
-                            <div class="bg-[var(--primary)] text-white p-2 rounded-lg mr-2">
-                                <i class="fas fa-store text-lg"></i>
-                            </div>
-                            <h3 class="text-lg sm:text-xl font-bold text-[var(--text-dark)]">Digital Dropshipping</h3>
-                        </div>
-                        <p class="text-sm sm:text-base text-gray-600 mb-2">Automated digital product resale.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-[var(--primary)] text-white px-2 py-1 rounded-full text-xs">E-commerce</span>
-                            <span class="bg-[var(--primary)] text-white px-2 py-1 rounded-full text-xs">Automation</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="contact" class="py-12 sm:py-20 bg-[var(--bg-light)]" data-aos="fade-up">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-8 sm:mb-12">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-[var(--text-dark)] mb-2 relative">
-                        Let's Build Something Amazing
-                        <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-[var(--primary)]"></span>
-                    </h2>
-                    <p class="text-sm sm:text-xl text-gray-600 max-w-2xl mx-auto">Discuss your project with us.</p>
-                </div>
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="md:flex">
-                        <div class="p-4 sm:p-6 gradient-bg text-white">
-                            <h3 class="text-lg sm:text-2xl font-bold mb-4">Contact Information</h3>
-                            <div class="space-y-4">
-                                <div class="flex items-start">
-                                    <i class="fas fa-envelope text-lg mr-2"></i>
-                                    <div>
-                                        <h4 class="font-bold mb-1">Email</h4>
-                                        <a href="mailto:hello@code9.dev" class="hover:underline">hello@code9.dev</a>
-                                    </div>
-                                </div>
-                                <div class="flex items-start">
-                                    <i class="fas fa-map-marker-alt text-lg mr-2"></i>
-                                    <div>
-                                        <h4 class="font-bold mb-1">Location</h4>
-                                        <p>Serving Worldwide</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-4 sm:p-6">
-                            <form id="contact-form" class="space-y-4" novalidate>
-                                <div class="form-group">
-                                    <label for="name">Your Name</label>
-                                    <input type="text" id="name" name="name" placeholder="Your Name" class="w-full" required aria-required="true" aria-describedby="name-error">
-                                    <p id="name-error" class="text-red-500 text-sm mt-1 hidden">Please enter your name.</p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email Address</label>
-                                    <input type="email" id="email" name="email" placeholder="Email Address" class="w-full" required aria-required="true" aria-describedby="email-error">
-                                    <p id="email-error" class="text-red-500 text-sm mt-1 hidden">Please enter a valid email.</p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="service">Select a Service</label>
-                                    <select id="service" name="service" class="w-full" required aria-required="true" aria-describedby="service-error">
-                                        <option value="" disabled selected>Select a service</option>
-                                        <option value="custom-development">Custom Development</option>
-                                        <option value="automation">Business Automation</option>
-                                        <option value="product-development">Product Development</option>
-                                    </select>
-                                    <p id="service-error" class="text-red-500 text-sm mt-1 hidden">Please select a service.</p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="message">Your Message</label>
-                                    <textarea id="message" name="message" rows="3" placeholder="Your Message" class="w-full" required aria-required="true" aria-describedby="message-error"></textarea>
-                                    <p id="message-error" class="text-red-500 text-sm mt-1 hidden">Please enter a message.</p>
-                                </div>
-                                <button type="submit" class="w-full gradient-bg text-white py-2 px-4 rounded-lg hover:opacity-90 transition-opacity duration-200">Send Message</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer class="bg-[var(--text-dark)] text-white py-6 sm:py-12" data-aos="fade-up">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col sm:flex-row justify-between items-center">
-                <p class="text-sm mb-4 sm:mb-0">© 2025 Code 9. All rights reserved.</p>
-                <div class="flex space-x-4">
-                    <a href="https://twitter.com/code9" class="text-white hover:text-[var(--primary)]" aria-label="Twitter">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="https://linkedin.com/company/code9" class="text-white hover:text-[var(--primary)]" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="https://github.com/code9" class="text-white hover:text-[var(--primary)]" aria-label="GitHub">
-                        <i class="fab fa-github"></i>
+
+    <!-- Hero Section -->
+    <div class="gradient-bg">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-blue-800">
+                    Welcome to <span class="text-orange-500">Code 9</span>
+                </h1>
+                <p class="mt-6 max-w-2xl mx-auto text-xl text-gray-600">
+                    We specialize in crafting cutting-edge software solutions designed to elevate your business. Our expert team combines creativity with technical prowess to deliver custom applications, robust systems, and seamless digital experiences.
+                </p>
+                <div class="mt-10">
+                    <a href="#hire" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-orange-500 hover:bg-orange-600">
+                        Get Started
+                        <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Services Section -->
+    <div id="services" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold text-blue-800 sm:text-4xl">
+                    Our Services
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
+                    Explore how we can transform your ideas into reality.
+                </p>
+            </div>
+
+            <div class="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <!-- Service 1 -->
+                <div class="service-card bg-blue-50 rounded-lg overflow-hidden shadow-md p-6 transition duration-300">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-700">
+                        <i class="fas fa-code text-xl"></i>
+                    </div>
+                    <h3 class="mt-4 text-lg font-medium text-blue-800">Custom Software Development</h3>
+                    <p class="mt-2 text-base text-gray-600">
+                        Tailored solutions built to your exact specifications.
+                    </p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card bg-orange-50 rounded-lg overflow-hidden shadow-md p-6 transition duration-300">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-orange-100 text-orange-700">
+                        <i class="fas fa-mobile-alt text-xl"></i>
+                    </div>
+                    <h3 class="mt-4 text-lg font-medium text-blue-800">Web & Mobile Applications</h3>
+                    <p class="mt-2 text-base text-gray-600">
+                        Engaging and intuitive experiences across all devices.
+                    </p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card bg-blue-50 rounded-lg overflow-hidden shadow-md p-6 transition duration-300">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-700">
+                        <i class="fas fa-cloud text-xl"></i>
+                    </div>
+                    <h3 class="mt-4 text-lg font-medium text-blue-800">Cloud Solutions</h3>
+                    <p class="mt-2 text-base text-gray-600">
+                        Scalable and secure cloud-based architectures.
+                    </p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card bg-orange-50 rounded-lg overflow-hidden shadow-md p-6 transition duration-300">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-orange-100 text-orange-700">
+                        <i class="fas fa-brain text-xl"></i>
+                    </div>
+                    <h3 class="mt-4 text-lg font-medium text-blue-800">Data Analytics & AI</h3>
+                    <p class="mt-2 text-base text-gray-600">
+                        Unlock insights and drive innovation with intelligent solutions.
+                    </p>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="service-card bg-blue-50 rounded-lg overflow-hidden shadow-md p-6 transition duration-300">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-700">
+                        <i class="fas fa-paint-brush text-xl"></i>
+                    </div>
+                    <h3 class="mt-4 text-lg font-medium text-blue-800">UI/UX Design</h3>
+                    <p class="mt-2 text-base text-gray-600">
+                        User-centric designs that prioritize usability and aesthetics.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Maintenance Section -->
+    <div id="maintenance" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-3xl font-extrabold text-blue-800 sm:text-4xl">
+                    Maintenance & Support Plans
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-600 lg:mx-auto">
+                    Ensure the continuous performance and security of your software with our comprehensive Maintenance & Support Plans.
+                </p>
+            </div>
+
+            <div class="mt-12 bg-white shadow-xl rounded-lg overflow-hidden">
+                <div class="grid md:grid-cols-3">
+                    <!-- Plan 1 -->
+                    <div class="p-8 border-b md:border-b-0 md:border-r border-gray-200">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-blue-100 rounded-md p-3">
+                                <i class="fas fa-shield-alt text-blue-700 text-xl"></i>
+                            </div>
+                            <h3 class="ml-4 text-lg font-medium text-blue-800">Basic</h3>
+                        </div>
+                        <p class="mt-4 text-gray-600">
+                            Essential maintenance for small businesses with basic needs.
+                        </p>
+                        <ul class="mt-6 space-y-4">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check text-green-500"></i>
+                                </div>
+                                <p class="ml-3 text-gray-600">Monthly updates</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check text-green-500"></i>
+                                </div>
+                                <p class="ml-3 text-gray-600">Bug fixes</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check text-green-500"></i>
+                                </div>
+                                <p class="ml-3 text-gray-600">Email support</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Plan 2 -->
+                    <div class="p-8 border-b md:border-b-0 md:border-r border-gray-200">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-orange-100 rounded-md p-3">
+                                <i class="fas fa-star text-orange-500 text-xl"></i>
+                            </div>
+                            <h3 class="ml-4 text-lg font-medium text-blue-800">Professional</h3>
+                        </div>
+                        <p class="mt-4 text-gray-600">
+                            Comprehensive support for growing businesses.
+                        </p>
+                        <ul class="mt-6 space-y-4">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check text-green-500"></i>
+                                </div>
+                                <p class="ml-3 text-gray-600">Weekly updates</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check text-green-500"></i>
+                                </div>
+                                <p class="ml-3 text-gray-600">Priority bug fixes</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check text-green-500"></i>
+                                </div>
+                                <p class="ml-3 text-gray-600">Phone & email support</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check text-green-500"></i>
+                                </div>
+                                <p class="ml-3 text-gray-600">Security monitoring</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Plan 3 -->
+                    <div class="p-8">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-blue-100 rounded-md p-3">
+                                <i class="fas fa-crown text-blue-700 text-xl"></i>
+                            </div>
+                            <h3 class="ml-4 text-lg font-medium text-blue-800">Enterprise</h3>
+                        </div>
+                        <p class="mt-4 text-gray-600">
+                            Premium support for mission-critical systems.
+                        </p>
+                        <ul class="mt-6 space-y-4">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check text-green-500"></i>
+                                </div>
+                                <p class="ml-3 text-gray-600">24/7 monitoring</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check text-green-500"></i>
+                                </div>
+                                <p class="ml-3 text-gray-600">Immediate response</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check text-green-500"></i>
+                                </div>
+                                <p class="ml-3 text-gray-600">Dedicated support team</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check text-green-500"></i>
+                                </div>
+                                <p class="ml-3 text-gray-600">Custom SLAs</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check text-green-500"></i>
+                                </div>
+                                <p class="ml-3 text-gray-600">Quarterly strategy reviews</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="px-8 py-6 bg-gray-50 text-center">
+                    <a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-orange-500 hover:bg-orange-600">
+                        Learn More About Our Maintenance Plans
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div id="testimonials" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold text-blue-800 sm:text-4xl">
+                    What Our Clients Say
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
+                    Hear directly from businesses who have experienced the Code 9 difference.
+                </p>
+            </div>
+
+            <div class="mt-16 grid gap-8 md:grid-cols-2">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-blue-50 rounded-lg p-8 shadow-md">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <div class="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-700">
+                                <i class="fas fa-user text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-blue-800">Sarah L.</h4>
+                            <p class="text-gray-600">CEO of InnovateTech</p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-700 italic">
+                            "Code 9 transformed our online presence. Their team was incredibly professional and delivered a solution that exceeded our expectations."
+                        </p>
+                    </div>
+                    <div class="mt-4 flex">
+                        <div class="rating-star">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-orange-50 rounded-lg p-8 shadow-md">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <div class="h-12 w-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-700">
+                                <i class="fas fa-user text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-blue-800">Mark D.</h4>
+                            <p class="text-gray-600">Operations Manager at Global Logistics</p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-700 italic">
+                            "The maintenance service from Code 9 has been invaluable. We no longer worry about system downtime and can focus on our core business."
+                        </p>
+                    </div>
+                    <div class="mt-4 flex">
+                        <div class="rating-star">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rating Widget -->
+            <div class="mt-16 bg-gray-50 rounded-lg p-8 shadow-inner">
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold text-blue-800">Our Average Rating</h3>
+                    <div class="mt-4 flex justify-center">
+                        <div class="rating-star text-3xl">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="mt-2 text-gray-600">4.7 out of 5 based on 128 reviews</p>
+                    <div class="mt-6 w-full bg-gray-200 rounded-full h-4">
+                        <div class="bg-orange-500 h-4 rounded-full" style="width: 95%"></div>
+                    </div>
+                    <p class="mt-1 text-sm text-gray-600">95% of customers recommend us</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hire Team Section -->
+    <div id="hire" class="py-16 gradient-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-3xl font-extrabold text-blue-800 sm:text-4xl">
+                    Hire Our Team
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-600 lg:mx-auto">
+                    Ready to bring your next big idea to life? Our dedicated team of developers, designers, and project managers is available to work on your next project.
+                </p>
+            </div>
+
+            <div class="mt-12">
+                <div class="bg-white rounded-lg shadow-xl overflow-hidden">
+                    <div class="grid md:grid-cols-2">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-blue-800">Flexible Engagement Models</h3>
+                            <p class="mt-4 text-gray-600">
+                                We offer various engagement models to suit your specific requirements:
+                            </p>
+                            <ul class="mt-6 space-y-4">
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-check-circle text-green-500"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600"><span class="font-medium">Project-based</span> - Fixed scope and price</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-check-circle text-green-500"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600"><span class="font-medium">Dedicated team</span> - Exclusive resources for your project</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-check-circle text-green-500"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600"><span class="font-medium">Staff augmentation</span> - Supplement your existing team</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-blue-50 p-8 flex items-center justify-center">
+                            <div class="text-center">
+                                <h3 class="text-xl font-bold text-blue-800">Get a Free Consultation</h3>
+                                <p class="mt-2 text-gray-600">
+                                    Let's discuss your project requirements and find the best solution for your needs.
+                                </p>
+                                <div class="mt-6">
+                                    <a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-orange-500 hover:bg-orange-600">
+                                        Contact Us Now
+                                        <i class="fas fa-arrow-right ml-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Developers Section -->
+    <div id="developers" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-3xl font-extrabold text-blue-800 sm:text-4xl">
+                    Developers: Connect & Showcase Your Creations
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-600 lg:mx-auto">
+                    Are you a talented developer with innovative websites looking for clients?
+                </p>
+            </div>
+
+            <div class="mt-12">
+                <div class="bg-gradient-to-r from-blue-50 to-orange-50 rounded-lg shadow-lg overflow-hidden">
+                    <div class="grid md:grid-cols-2">
+                        <div class="p-8 md:p-12">
+                            <h3 class="text-2xl font-bold text-blue-800">Join Our Developer Network</h3>
+                            <p class="mt-4 text-gray-600">
+                                Code 9 provides a platform for you to connect directly with businesses seeking ready-made solutions. Showcase your projects, set your terms, and expand your reach.
+                            </p>
+                            <ul class="mt-6 space-y-4">
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-check text-green-500"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600">Showcase your portfolio to potential clients</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-check text-green-500"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600">Set your own rates and terms</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-check text-green-500"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600">Access to vetted business opportunities</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-check text-green-500"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600">Community support and networking</p>
+                                </li>
+                            </ul>
+                            <div class="mt-8">
+                                <a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-700 hover:bg-blue-800">
+                                    Join Now
+                                    <i class="fas fa-user-plus ml-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="hidden md:block bg-blue-50">
+                            <div class="h-full flex items-center justify-center p-8">
+                                <div class="relative w-full h-full">
+                                    <div class="absolute top-0 left-0 w-32 h-32 bg-orange-100 rounded-lg transform rotate-6"></div>
+                                    <div class="absolute top-1/2 left-1/2 w-32 h-32 bg-blue-100 rounded-lg transform -rotate-12 -translate-x-1/2 -translate-y-1/2"></div>
+                                    <div class="absolute bottom-0 right-0 w-32 h-32 bg-orange-200 rounded-lg transform rotate-3"></div>
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <i class="fas fa-laptop-code text-6xl text-blue-700 opacity-30"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-800 text-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-medium mb-4">Code 9</h3>
+                    <p class="text-blue-200">
+                        Cutting-edge software solutions to elevate your business.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-medium mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-blue-200 hover:text-white">Custom Development</a></li>
+                        <li><a href="#" class="text-blue-200 hover:text-white">Web & Mobile Apps</a></li>
+                        <li><a href="#" class="text-blue-200 hover:text-white">Cloud Solutions</a></li>
+                        <li><a href="#" class="text-blue-200 hover:text-white">Data Analytics</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-medium mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-blue-200 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="text-blue-200 hover:text-white">Careers</a></li>
+                        <li><a href="#" class="text-blue-200 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-blue-200 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-medium mb-4">Connect</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-blue-200 hover:text-white">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-blue-200 hover:text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-blue-200 hover:text-white">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-blue-200 hover:text-white">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-blue-200">hello@code9.com</p>
+                        <p class="text-blue-200">+1 (555) 123-4567</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-blue-700">
+                <p class="text-center text-blue-200">
+                    &copy; 2023 Code 9. All rights reserved.
+                </p>
+            </div>
+        </div>
     </footer>
-    <a href="#" id="back-to-top" class="hidden" aria-label="Back to top">
-        <i class="fas fa-arrow-up"></i>
-    </a>
-    <button id="dark-mode-toggle" class="fixed top-4 right-4 bg-white text-[var(--text-dark)] p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--primary)]" aria-label="Toggle dark mode">
-        <i class="fas fa-moon"></i>
-    </button>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" integrity="sha384-cM1gB+FtklX+8dVbas5A4kD0Y5F5F6vT2uT7fO5oB+5o5V5F5F6vT2uT7fO5oB+" crossorigin="anonymous"></script>
+
     <script>
-        AOS.init({ duration: 800, once: true });
-
-        // Preloader
-        window.addEventListener('load', () => {
-            const minDisplayTime = 1000; // 1 second
-            const startTime = Date.now();
-            const timeElapsed = Date.now() - startTime;
-
-            try {
-                if (timeElapsed < minDisplayTime) {
-                    setTimeout(hidePreloader, minDisplayTime - timeElapsed);
-                } else {
-                    hidePreloader();
-                }
-            } catch (error) {
-                console.error('Preloader error:', error);
-            }
-        });
-
-        setTimeout(() => {
-            try {
-                hidePreloader();
-            } catch (error) {
-                console.error('Preloader error:', error);
-            }
-        }, 5000);
-
-        function hidePreloader() {
-            const preloader = document.getElementById('preloader');
-            if (preloader) {
-                preloader.style.transition = 'opacity 0.3s';
-                preloader.style.opacity = '0';
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                }, 300);
-            }
-        }
-
         // Mobile menu toggle
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuToggle.addEventListener('click', () => {
-            const isExpanded = !mobileMenu.classList.toggle('hidden');
-            menuToggle.setAttribute('aria-expanded', isExpanded);
-            const icon = menuToggle.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
         });
 
-        // Smooth scroll and mobile menu close
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', (e) => {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(anchor.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                    mobileMenu.classList.add('hidden');
-                    menuToggle.setAttribute('aria-expanded', 'false');
-                    menuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
-                }
-            });
-        });
-
-        // Debounce utility
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-
-        // Scroll progress and back-to-top
-        const backToTop = document.getElementById('back-to-top');
-        const scrollProgress = document.getElementById('scroll-progress');
-        const handleScroll = debounce(() => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            scrollProgress.style.width = scrollPercent + '%';
-            backToTop.classList.toggle('visible', scrollTop > 300);
-        }, 10);
-        window.addEventListener('scroll', handleScroll);
-
-        // Dark mode toggle
-        const darkModeToggle = document.getElementById('dark-mode-toggle');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches || localStorage.getItem('dark-mode') === 'true';
-        if (prefersDark) {
-            document.body.classList.add('dark-mode');
-            darkModeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
-        }
-        darkModeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const icon = darkModeToggle.querySelector('i');
-            icon.classList.toggle('fa-moon');
-            icon.classList.toggle('fa-sun');
-            localStorage.setItem('dark-mode', document.body.classList.contains('dark-mode'));
-        });
-
-        // Contact form validation and submission
-        const contactForm = document.getElementById('contact-form');
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            let isValid = true;
-            const inputs = contactForm.querySelectorAll('input, select, textarea');
-            inputs.forEach(input => {
-                const error = document.getElementById(`${input.id}-error`);
-                if (!input.value.trim()) {
-                    error.classList.remove('hidden');
-                    isValid = false;
-                    input.setAttribute('aria-invalid', 'true');
-                } else {
-                    error.classList.add('hidden');
-                    input.setAttribute('aria-invalid', 'false');
-                    if (input.type === 'email' && !input.checkValidity()) {
-                        error.textContent = 'Please enter a valid email address.';
-                        error.classList.remove('hidden');
-                        input.setAttribute('aria-invalid', 'true');
-                        isValid = false;
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
                     }
                 }
             });
-
-            if (isValid) {
-                alert('Thank you! We’ll get back to you soon.');
-                contactForm.reset();
-            }
         });
     </script>
 </body>
