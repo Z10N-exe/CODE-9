@@ -8,58 +8,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/css/styles.css">
 </head>
-<body class="font-poppins bg-gray-100">
-    <!-- Navigation -->
+<body class="min-h-screen gradient-bg">
     <nav class="bg-white shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <span class="text-2xl font-bold text-blue-700">Code 9</span>
-                </div>
-                <div class="hidden md:flex md:items-center md:space-x-8">
-                    <a href="index.html" class="text-gray-700 hover:text-orange-500">Home</a>
-                    <a href="dashboard.html" class="text-gray-700 hover:text-orange-500">Dashboard</a>
-                    <a href="careers.html" class="text-gray-700 hover:text-orange-500">Careers</a>
-                </div>
-            </div>
-        </div>
+        <!-- Same nav as dashboard -->
     </nav>
 
-    <!-- Blog Section -->
-    <div class="gradient-bg py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h2 class="text-3xl font-extrabold text-blue-800 sm:text-4xl">Code 9 Blog</h2>
-                <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
-                    Stay updated with the latest trends, tips, and insights in software development.
-                </p>
-            </div>
-
-            <div class="mt-12 grid gap-8 md:grid-cols-2">
-                <!-- Blog Post 1 -->
-                <div class="bg-white rounded-lg shadow-md p-6 testimonial-card transition duration-300">
-                    <h3 class="text-lg font-medium text-blue-800">The Future of Web Development in 2025</h3>
-                    <p class="mt-2 text-gray-600">Explore emerging trends shaping the web development landscape.</p>
-                    <div class="mt-4">
-                        <a href="#" class="text-orange-500 hover:underline">Read More</a>
-                    </div>
-                </div>
-                <!-- Blog Post 2 -->
-                <div class="bg-white rounded-lg shadow-md p-6 testimonial-card transition duration-300">
-                    <h3 class="text-lg font-medium text-blue-800">Scaling Your App with Cloud Solutions</h3>
-                    <p class="mt-2 text-gray-600">Learn how to leverage cloud technologies for growth.</p>
-                    <div class="mt-4">
-                        <a href="#" class="text-orange-500 hover:underline">Read More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-extrabold text-blue-800 text-center">Our Blog</h2>
+        <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto text-center">Stay updated with the latest insights and tips from Code 9.</p>
+        <div id="blogList" class="mt-8 grid gap-8 md:grid-cols-2"></div>
     </div>
 
-    <footer class="bg-blue-800 text-white">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-            <p class="text-center text-blue-200">&copy; 2025 Code 9. All rights reserved.</p>
-        </div>
-    </footer>
+    <script src="/js/main.js"></script>
+    <script src="/js/blog.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up | Code 9</title>
+    <title>Log In | Code 9</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/css/styles.css">
@@ -25,12 +25,12 @@
         </div>
     </nav>
 
-    <!-- Signup Section -->
+    <!-- Login Section -->
     <div class="min-h-screen flex items-center justify-center gradient-bg">
         <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full">
-            <h2 class="text-3xl font-extrabold text-blue-800 text-center">Create Your Account</h2>
-            <p class="mt-2 text-center text-gray-600">Join Code 9 to access exclusive services</p>
-            <form id="signupForm" class="mt-8 space-y-6" action="/signup" method="POST">
+            <h2 class="text-3xl font-extrabold text-blue-800 text-center">Log In to Your Account</h2>
+            <p class="mt-2 text-center text-gray-600">Access your Code 9 account</p>
+            <form id="loginForm" class="mt-8 space-y-6" action="/login" method="POST">
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
                     <input id="email" name="email" type="email" required class="mt-1 w-full px-4 py-2 border rounded-md focus:ring-orange-500 focus:border-orange-500">
@@ -39,19 +39,26 @@
                     <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                     <input id="password" name="password" type="password" required class="mt-1 w-full px-4 py-2 border rounded-md focus:ring-orange-500 focus:border-orange-500">
                 </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input id="remember-me" type="checkbox" class="h-4 w-4 text-orange-500 focus:ring-orange-500 border-gray-300 rounded">
+                        <label for="remember-me" class="ml-2 block text-sm text-gray-700">Remember me</label>
+                    </div>
+                    <a href="#" class="text-sm text-orange-500 hover:underline">Forgot Password?</a>
+                </div>
                 <div>
                     <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-500 hover:bg-orange-600">
-                        Sign Up <i class="fas fa-user-plus ml-2"></i>
+                        Log In <i class="fas fa-sign-in-alt ml-2"></i>
                     </button>
                 </div>
             </form>
             <p id="message" class="mt-4 text-center text-sm text-gray-600"></p>
             <p class="mt-4 text-center text-sm text-gray-600">
-                Already have an account? <a href="/login" class="text-orange-500 hover:underline">Log in</a>
+                Don't have an account? <a href="/signup" class="text-orange-500 hover:underline">Sign up</a>
             </p>
         </div>
     </div>
 
-    <script src="/js/signup.js"></script>
+    <script src="/js/login.js"></script>
 </body>
 </html>

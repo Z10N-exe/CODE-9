@@ -1,85 +1,106 @@
-const socket = io();
-const token = localStorage.getItem('token'); // Assume token stored after login
+const socket = io('http://localhost:5000');
+let chart;
 
-if (!token) {
-    window.location.href = '/signup.html';
-}
-
-// Fetch user data and initialize streak calendar
-async function loadDashboard() {
-    try {
-        const response = await fetch('/api/auth/user', {
-            headers: { Authorization: `Bearer ${token}` },
-        });
-        const user = await response.json();
-        renderStreakCalendar(user.jobRequests);
-        document.getElementById('streakCount').textContent = user.streak;
-        renderJobRequests(user.jobRequests);
-    } catch (error) {
-        console.error('Error loading dashboard:', error);
+function fetchJobRequests() {
+    const userId = sessionStorage.getItem('userId');
+    if (!userId) {
+        window.location.href = '/login';
+        return [];
     }
+    return Storage.getJobRequests(userId);
 }
 
-// Render GitHub-like streak calendar
-function renderStreakCalendar(jobRequests) {
-    const calendar = document.getElementById('streakCalendar');
+function updateStreakChart(jobs) {
+    const ctx = document.getElementById('streakChart').getContext('2d');
+    const dates = {};
+    jobs.forEach(job => {
+        const date = job.createdAt.split('T')[0];
+        dates[date] = (dates[date] || 0) + 1;
+    });
+
+    const labels = [];
+    const data = [];
     const today = new Date();
-    const days = Array(35).fill(0); // 5 weeks
-    jobRequests.forEach((job) => {
-        const jobDate = new Date(job.date);
-        const diffDays = Math.floor((today - jobDate) / (1000 * 60 * 60 * 24));
-        if (diffDays < 35) days[diffDays]++;
-    });
+    for (let i = 29; i >= 0; i--) {
+        const date = new Date(today - i * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+        labels.push(date);
+        data.push(dates[date] || 0);
+    }
 
-    calendar.innerHTML = '';
-    days.forEach((count, i) => {
-        const intensity = count > 0 ? Math.min(count, 4) : 0;
-        calendar.innerHTML += `
-            <div class="w-4 h-4 rounded-sm ${intensity === 0 ? 'bg-gray-200' : `bg-green-${intensity * 100}`}" title="${count} job requests on ${new Date(today - i * 86400000).toLocaleDateString()}"></div>
-        `;
+    if (chart) chart.destroy();
+    chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels,
+            datasets: [{
+                label: 'Job Requests',
+                data,
+                backgroundColor: data.map(count => count > 0 ? '#f97316' : '#e5e7eb'),
+                borderColor: '#2563eb',
+                borderWidth: 1,
+            }],
+        },
+        options: {
+            scales: {
+                y: { beginAtZero: true, title: { display: true, text: 'Requests' } },
+                x: { title: { display: true, text: 'Date' } },
+            },
+            plugins: { legend: { display: false } },
+            animation: { duration: 1000, easing: 'easeOutBounce' },
+        },
     });
 }
 
-// Render job requests
-function renderJobRequests(jobRequests) {
-    const list = document.getElementById('jobRequestsList');
-    list.innerHTML = jobRequests.map((job) => `
-        <li class="text-gray-600">${job.jobTitle} - ${new Date(job.date).toLocaleDateString()}</li>
-    `).join('');
-}
-
-// Handle job request form
 document.getElementById('jobRequestForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const jobTitle = document.getElementById('jobTitle').value;
+    const jobBtnText = document.getElementById('jobBtnText');
+    const jobSpinner = document.getElementById('jobSpinner');
+    const userId = sessionStorage.getItem('userId');
+
+    jobBtnText.textContent = 'Submitting...';
+    jobSpinner.classList.remove('hidden');
+
     try {
-        const response = await fetch('/api/auth/job-request', {
+        const response = await fetch('/api/jobs/request', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({ userId: 'user_id_from_token', jobTitle }), // Replace with actual user ID from token
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title: jobTitle }),
         });
-        const data = await response.json();
-        alert(data.message);
-        document.getElementById('jobTitle').value = '';
+        if (response.ok) {
+            const job = await response.json();
+            Storage.saveJobRequest(job);
+            document.getElementById('jobTitle').value = '';
+            updateStreakChart(fetchJobRequests());
+        } else {
+            alert('Failed to submit job request.');
+        }
     } catch (error) {
-        alert('Error submitting job request');
+        alert('Error submitting job request.');
+    } finally {
+        jobBtnText.textContent = 'Submit Request';
+        jobSpinner.classList.add('hidden');
     }
 });
 
-// Real-time streak updates
-socket.on('streakUpdate', (data) => {
-    document.getElementById('streakCount').textContent = data.streak;
-    renderStreakCalendar(data.jobRequests);
-    renderJobRequests(data.jobRequests);
+socket.on('jobRequestUpdate', (job) => {
+    const userId = sessionStorage.getItem('userId');
+    if (job.userId === userId) {
+        Storage.saveJobRequest(job);
+        updateStreakChart(fetchJobRequests());
+    }
 });
 
-// Logout
-document.getElementById('logout').addEventListener('click', () => {
-    localStorage.removeItem('token');
-    window.location.href = '/signup.html';
+document.getElementById('logoutBtn').addEventListener('click', async () => {
+    await fetch('/api/auth/logout', { method: 'POST' });
+    sessionStorage.removeItem('userId');
+    window.location.href = '/';
 });
 
-loadDashboard();
+document.getElementById('mobileLogoutBtn').addEventListener('click', async () => {
+    await fetch('/api/auth/logout', { method: 'POST' });
+    sessionStorage.removeItem('userId');
+    window.location.href = '/';
+});
+
+updateStreakChart(fetchJobRequests());

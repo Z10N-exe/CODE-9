@@ -8,66 +8,52 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/css/styles.css">
 </head>
-<body class="font-poppins bg-gray-100">
-    <!-- Navigation -->
+<body class="min-h-screen gradient-bg">
     <nav class="bg-white shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <span class="text-2xl font-bold text-blue-700">Code 9</span>
-                </div>
-                <div class="hidden md:flex md:items-center md:space-x-8">
-                    <a href="index.html" class="text-gray-700 hover:text-orange-500">Home</a>
-                    <a href="dashboard.html" class="text-gray-700 hover:text-orange-500">Dashboard</a>
-                    <a href="blog.html" class="text-gray-700 hover:text-orange-500">Blog</a>
-                </div>
-            </div>
-        </div>
+        <!-- Same nav as dashboard -->
     </nav>
 
-    <!-- Careers Section -->
-    <div class="gradient-bg py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h2 class="text-3xl font-extrabold text-blue-800 sm:text-4xl">Join Our Team</h2>
-                <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
-                    At Code 9, we're looking for passionate individuals to join our mission of delivering cutting-edge software solutions.
-                </p>
-            </div>
-
-            <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                <!-- Job Listing 1 -->
-                <div class="bg-white rounded-lg shadow-md p-6 service-card transition duration-300">
-                    <h3 class="text-lg font-medium text-blue-800">Senior Full Stack Developer</h3>
-                    <p class="mt-2 text-gray-600">Lead development of scalable web applications.</p>
-                    <div class="mt-4">
-                        <a href="contact.html" class="text-orange-500 hover:underline">Apply Now</a>
-                    </div>
+    <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-extrabold text-blue-800 text-center">Join Our Team</h2>
+        <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto text-center">Explore exciting career opportunities at Code 9.</p>
+        <div id="jobList" class="mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3"></div>
+        <div class="mt-12 bg-white rounded-lg shadow-xl p-8 card">
+            <h3 class="text-2xl font-bold text-blue-800">Apply Now</h3>
+            <form id="applicationForm" class="mt-6 space-y-4">
+                <div>
+                    <label for="jobId" class="block text-sm font-medium text-gray-700">Select Job</label>
+                    <select id="jobId" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500" required></select>
                 </div>
-                <!-- Job Listing 2 -->
-                <div class="bg-white rounded-lg shadow-md p-6 service-card transition duration-300">
-                    <h3 class="text-lg font-medium text-blue-800">UI/UX Designer</h3>
-                    <p class="mt-2 text-gray-600">Create intuitive and beautiful user experiences.</p>
-                    <div class="mt-4">
-                        <a href="#" class="text-orange-500 hover:underline">Apply Now</a>
-                    </div>
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                    <input
+                        id="name"
+                        type="text"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+                        required
+                    >
                 </div>
-                <!-- Job Listing 3 -->
-                <div class="bg-white rounded-lg shadow-md p-6 service-card transition duration-300">
-                    <h3 class="text-lg font-medium text-blue-800">DevOps Engineer</h3>
-                    <p class="mt-2 text-gray-600">Optimize our cloud infrastructure and CI/CD pipelines.</p>
-                    <div class="mt-4">
-                        <a href="contact.html" class="text-orange-500 hover:underline">Apply Now</a>
-                    </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input
+                        id="email"
+                        type="email"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+                        required
+                    >
                 </div>
-            </div>
+                <button
+                    type="submit"
+                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-500 hover:bg-orange-600 btn"
+                >
+                    <span id="applyBtnText">Submit Application</span>
+                    <i id="applySpinner" class="fas fa-spinner hidden spinner ml-2"></i>
+                </button>
+            </form>
         </div>
     </div>
 
-    <footer class="bg-blue-800 text-white">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-            <p class="text-center text-blue-200">&copy; 2025 Code 9. All rights reserved.</p>
-        </div>
-    </footer>
+    <script src="/js/main.js"></script>
+    <script src="/js/careers.js"></script>
 </body>
 </html>

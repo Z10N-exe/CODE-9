@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open Sea by Code 9 | Developer Marketplace</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -43,7 +44,7 @@
             position: fixed;
             pointer-events: none;
             z-index: 9999;
-            transition: transform 0.1s ease;
+            will-change: transform;
         }
 
         .cursor::after {
@@ -227,7 +228,7 @@
         </div>
     </div>
 
-    <!-- Services Section (Unchanged) -->
+    <!-- Services Section -->
     <div id="services" class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
@@ -239,7 +240,7 @@
                 </p>
             </div>
             <div class="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                <div class="service-card bg-blue-50 rounded-lg overflow-hidden shadow-md p-6 transition duration-300">
+                <div class="service-card bg-blue verla-50 rounded-lg overflow-hidden shadow-md p-6 transition duration-300">
                     <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-700">
                         <i class="fas fa-code text-xl"></i>
                     </div>
@@ -249,7 +250,7 @@
                     </p>
                 </div>
                 <div class="service-card bg-orange-50 rounded-lg overflow-hidden shadow-md p-6 transition duration-300">
-                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-orange-100 text-orange-700">
+                    <div class="flex items-center justify-center h-12 w-12wick rounded-md bg-orange-100 text-orange-700">
                         <i class="fas fa-mobile-alt text-xl"></i>
                     </div>
                     <h3 class="mt-4 text-lg font-medium text-blue-800">Web & Mobile Applications</h3>
@@ -331,7 +332,7 @@
         </div>
     </div>
 
-    <!-- Testimonials Section (Modified Colors) -->
+    <!-- Testimonials Section -->
     <div id="testimonials" class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
@@ -420,7 +421,7 @@
         </div>
     </div>
 
-    <!-- Hire Team Section (Unchanged) -->
+    <!-- Hire Team Section -->
     <div id="hire" class="py-16 gradient-bg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="lg:text-center">
@@ -480,7 +481,7 @@
         </div>
     </div>
 
-    <!-- Developers Section (Modified for Marketplace) -->
+    <!-- Developers Section -->
     <div id="developers" class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="lg:text-center">
@@ -565,7 +566,7 @@
         </div>
     </div>
 
-    <!-- Footer (Modified Colors) -->
+    <!-- Footer -->
     <footer class="bg-blue-900 text-white">
         <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -578,19 +579,19 @@
                 <div>
                     <h3 class="text-lg font-medium mb-4">Services</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-blue-200 hover:text-white">Custom Development</a></li>
-                        <li><a href="#" class="text-blue-200 hover:text-white">Web & Mobile Apps</a></li>
-                        <li><a href="#" class="text-blue-200 hover:text-white">Cloud Solutions</a></li>
-                        <li><a href="#" class="text-blue-200 hover:text-white">Data Analytics</a></li>
+                        <li><a href="signup.html" class="text-blue-200 hover:text-white">Custom Development</a></li>
+                        <li><a href="signup.html" class="text-blue-200 hover:text-white">Web & Mobile Apps</a></li>
+                        <li><a href="signup.html" class="text-blue-200 hover:text-white">Cloud Solutions</a></li>
+                        <li><a href="signup.html" class="text-blue-200 hover:text-white">Data Analytics</a></li>
                     </ul>
                 </div>
                 <div>
                     <h3 class="text-lg font-medium mb-4">Company</h3>
                     <ul class="space-y-2">
                         <li><a href="#about.html" class="text-blue-200 hover:text-white">About Us</a></li>
-                        <li><a href="#" class="text-blue-200 hover:text-white">Careers</a></li>
-                        <li><a href="#" class="text-blue-200 hover:text-white">Blog</a></li>
-                        <li><a href="#" class="text-blue-200 hover:text-white">Contact</a></li>
+                        <li><a href="careers.html" class="text-blue-200 hover:text-white">Careers</a></li>
+                        <li><a href="blog.html" class="text-blue-200 hover:text-white">Blog</a></li>
+                        <li><a href="" class="text-blue-200 hover:text-white">Contact</a></li>
                     </ul>
                 </div>
                 <div>
@@ -653,13 +654,6 @@
             });
         });
 
-        // Custom Cursor
-        const cursor = document.querySelector('.cursor');
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = `${e.clientX}px`;
-            cursor.style.top = `${e.clientY}px`;
-        });
-
         // Modal Functionality
         const modal = document.getElementById('adminModal');
         const form = document.getElementById('adminForm');
@@ -685,6 +679,77 @@
             if (e.target === modal) {
                 closeModal();
             }
+        });
+
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        let currentX = 0;
+        let currentY = 0;
+        let targetX = 0;
+        let targetY = 0;
+        let isInteracting = false;
+
+        // Initialize cursor position and visibility
+        cursor.style.opacity = 0;
+
+        // Smoothly interpolate cursor position
+        const animateCursor = () => {
+            if (!isInteracting) return;
+            currentX += (targetX - currentX) * 0.2; // Adjust 0.2 for faster/slower easing
+            currentY += (targetY - currentY) * 0.2;
+            gsap.set(cursor, {
+                left: currentX,
+                top: currentY,
+            });
+            requestAnimationFrame(animateCursor);
+        };
+
+        // Mouse events for desktop
+        document.addEventListener('mousemove', (e) => {
+            isInteracting = true;
+            cursor.style.opacity = 1;
+            targetX = e.clientX;
+            targetY = e.clientY;
+            if (!gsap.isTweening(cursor)) {
+                animateCursor();
+            }
+        });
+
+        // Touch events for mobile
+        document.addEventListener('touchstart', (e) => {
+            isInteracting = true;
+            cursor.style.opacity = 1;
+            targetX = e.touches[0].clientX;
+            targetY = e.touches[0].clientY;
+            if (!gsap.isTweening(cursor)) {
+                animateCursor();
+            }
+        }, { passive: true });
+
+        document.addEventListener('touchmove', (e) => {
+            targetX = e.touches[0].clientX;
+            targetY = e.touches[0].clientY;
+        }, { passive: true });
+
+        document.addEventListener('touchend', () => {
+            isInteracting = false;
+            cursor.style.opacity = 0;
+        });
+
+        // Interactive element hover/touch effect
+        document.querySelectorAll('a, button, .service-card, .listing-card, .testimonial-card').forEach((el) => {
+            el.addEventListener('mouseenter', () => {
+                gsap.to(cursor, { scale: 1.5, duration: 0.2 });
+            });
+            el.addEventListener('mouseleave', () => {
+                gsap.to(cursor, { scale: 1, duration: 0.2 });
+            });
+            el.addEventListener('touchstart', () => {
+                gsap.to(cursor, { scale: 1.5, duration: 0.2 });
+            }, { passive: true });
+            el.addEventListener('touchend', () => {
+                gsap.to(cursor, { scale: 1, duration: 0.2 });
+            }, { passive: true });
         });
     </script>
 </body>

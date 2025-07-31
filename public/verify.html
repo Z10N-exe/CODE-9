@@ -3,29 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify Email | Code 9</title>
+    <title>Verifying | Code 9</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/css/styles.css">
 </head>
-<body class="font-poppins bg-gray-100">
-    <div class="min-h-screen flex items-center justify-center gradient-bg">
-        <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full text-center">
-            <h2 class="text-3xl font-extrabold text-blue-800">Verifying Your Email</h2>
-            <p class="mt-4 text-gray-600">Please wait while we verify your email address...</p>
-            <p class="mt-2 text-gray-600">You will be redirected to the dashboard upon successful verification.</p>
-        </div>
+<body class="min-h-screen gradient-bg flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-xl max-w-md w-full card text-center">
+        <h2 class="text-3xl font-extrabold text-blue-800">Verifying Your Account</h2>
+        <p class="mt-4 text-gray-600">Please wait while we verify your email...</p>
+        <i class="fas fa-spinner spinner text-4xl text-orange-500 mt-4"></i>
+        <p id="message" class="mt-4 text-sm text-gray-600 hidden"></p>
     </div>
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const token = urlParams.get('token');
-        fetch(`/api/auth/verify?token=${token}`)
-            .then((res) => {
-                if (!res.ok) throw new Error('Verification failed');
-                window.location.href = 'dashboard.html';
+        const token = window.location.pathname.split('/').pop();
+        fetch(`/api/auth/verify/${token}`)
+            .then(res => res.json())
+            .then(data => {
+                if (!data.message) return;
+                const messageEl = document.getElementById('message');
+                messageEl.textContent = data.message;
+                messageEl.classList.remove('hidden');
+                messageEl.classList.add('text-red-600');
             })
-            .catch((err) => {
-                document.querySelector('p').textContent = 'Verification failed. Please try again or contact support.';
+            .catch(() => {
+                const messageEl = document.getElementById('message');
+                messageEl.textContent = 'Verification failed.';
+                messageEl.classList.remove('hidden');
+                messageEl.classList.add('text-red-600');
             });
     </script>
 </body>
